@@ -1,0 +1,58 @@
+---
+# Questo è il "Frontmatter" YAML.
+# È nascosto dalla visualizzazione finale, ma serve per inserire i "metadati"
+# del tuo file (come le variabili in Obsidian). Potrai usarlo in futuro se decidi di
+# creare indici o barre di ricerca personalizzate.
+title: "Appunti di Test: Matematica e Informatica"
+date: "2026-08-24"
+course: "Analisi Matematica & Programmazione"
+tags: ["math", "cs", "test"]
+---
+
+{/* 
+  Questa è la sintassi per inserire commenti React/JSX dentro i file .mdx.
+  Non appariranno sulla pagina web, sono utilissimi per lasciare note invisibili!
+*/}
+
+# Titolo: Appunti di Test
+
+Questi appunti verificano che Next.js stia processando correttamente la sintassi Obsidian standard, inclusi i metadati YAML in cima al file.
+
+## 1. Formule Matematiche (KaTeX)
+
+Ecco un'equazione in linea: la famosa equazione di Einstein è $E = mc^2$. 
+
+E qui c'è un'equazione in blocco (LaTeX):
+
+$$
+f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2 \pi i \xi x} \,d\xi
+$$
+
+## 2. Blocchi di Codice (Syntax Highlighting)
+
+Ecco un esempio di codice in **C++** per testare l'evidenziazione della sintassi con `rehype-pretty-code` e `shiki`:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    
+    for (int num : numbers) {
+        std::cout << "Numero: " << num << std::endl;
+    }
+    
+    return 0;
+}
+```
+
+## 3. Stile "Inline" con JSX (Misto di Markdown e Codice)
+
+Essendo questo un file `.mdx` (e non solo `.md`), puoi usare direttamente l'HTML e le classi di Tailwind qui in mezzo!
+Ad esempio, questo è un blocco di testo personalizzato sul momento:
+
+
+<div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 border-l-4 border-yellow-500 rounded my-4">
+  <span className="font-bold text-yellow-700 dark:text-yellow-400">Nota Bene:</span> Questa è una nota creata inserendo un normale tag `<div>` dentro il file Markdown.
+</div>

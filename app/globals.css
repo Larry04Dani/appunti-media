@@ -1,25 +1,57 @@
+/* 
+  @import "tailwindcss"; carica il motore centrale di Tailwind CSS v4.
+  Da questo file, Tailwind legge tutto per permetterti di usare classi come `bg-red-500`.
+  Risorsa: https://tailwindcss.com/docs/installation
+*/
 @import "tailwindcss";
+
+/* 
+  Carica il plugin Typography (usato nel layout.tsx tramite la classe 'prose').
+  Senza questo, il Markdown tradotto in HTML apparirebbe nudo e senza stile.
+*/
 @plugin "@tailwindcss/typography";
 
+/* 
+  Questa riga serve a Tailwind v4 per capire che deve attivare i colori scuri 
+  (le classi che iniziano per `dark:`, come `dark:bg-black`) solo quando 
+  viene aggiunta la classe `.dark` al tag HTML (cosa che fa il nostro ThemeProvider).
+*/
+@custom-variant dark (&:is(.dark *));
+
+/* 
+  :root rappresenta la base del documento (il tema chiaro di default).
+  Qui definiamo delle "Variabili CSS" (es. --background) che useremo sotto.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #c8d4e1;
+  --foreground: #293443; /* Colore del testo primario */
+  --primary: #2a346f;
+  --secondary: #3f4f7c;
 }
 
+/* Integrazione con i font Geist di Next.js */
 @theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 
+  Quando il pulsante cambia il tema in scuro, il ThemeProvider aggiunge
+  la classe `.dark` all'HTML, che sovrascrive le variabili base con i colori scuri.
+*/
+.dark {
+  --background: #18181a;
+  --foreground: #c8c5b4;
+  --primary: #ffbe27;
+  --secondary: #e7e78d;
 }
 
+/* Applica i colori di sfondo e del testo decisi sopra all'intero corpo della pagina */
 body {
   background: var(--background);
   color: var(--foreground);

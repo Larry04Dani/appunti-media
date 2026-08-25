@@ -1,0 +1,57 @@
+#### Hello World
+```c
+#include <stdio.h> //Libreria standard per Input/Output
+main()              //Funzione di ingresso
+{
+	printf("hello world"); //Funzione per mostrare a schermo
+	return 0;  //è convenzione restituire 0 se l'esito del programma è positivo
+}
+```
+
+#### Variabili
+
+##### Esempio grafico
+```c
+int MyNumber;    //Dichiarazione di una variabile (di tipo: intero)
+MyNumber = 10;   //Assegnazione
+MyNumber = (MyNumber + 10)/4; //Puoi usare qualunque variabile 
+printf("%d",MyNumber) //Specificare il tipo di dato, per interpretarlo
+//Verrà stampato a schermo: 5 
+```
+
+##### Tipi di dato
+esistono diversi tipi di dato, alcuni tra i più comuni sono:
+
+| *Tipo*  | *Scopo*                 | *Dimensione* |
+| ------- | ----------------------- | ------------ |
+| `int`   | numero intero           | 4 Bytes      |
+| `float` | numero a virgola mobile | 4 Bytes      |
+| `char`  | carattere               | 1 Byte       |
+
+<div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 border-l-4 border-yellow-500 rounded my-4">
+  <span className="font-bold text-yellow-700 dark:text-yellow-400">Nota Bene:</span> in realtà la dimensione e l'interpretazione dei tipi può cambiare in base al compilatore o al sistema operativo, esistono tipi di dato particolari che assicurano una dimensione fissa.
+</div>
+> 
+>
+> Per conoscere meglio i tipi di dato vedere:  ***[[Tipi di dato]]*
+
+#### Operatori
+##### Operatori aritmetici
+Utilizzati per eseguire operazioni matematiche sui dati.
+
+| **Operatore** | **Nome**        | **Descrizione**                                                         | **Esempio.                   a = 10, b = 3** |
+| ------------- | --------------- | ----------------------------------------------------------------------- | -------------------------------------------- |
+| `+`           | Addizione       | Somma due valori                                                        | `a + b` $\rightarrow$ `13`                   |
+| `-`           | Sottrazione     | Sottrae il secondo valore dal primo                                     | `a - b` $\rightarrow$ `7`                    |
+| `*`           | Moltiplicazione | Moltiplica due valori                                                   | `a * b` $\rightarrow$ `30`                   |
+| `/`           | Divisione       | Divide il numeratore per il denominatore (se interi, tronca i decimali) | `a / b` $\rightarrow$ `3`                    |
+| `%`           | Modulo          | Restituisce il resto della divisione intera                             | `a % b` $\rightarrow$ `1`                    |
+
+##### Operatori logici
+Utilizzati per eseguire operazioni matematiche sui dati.
+
+| **Operatore** | **Nome**   | **Descrizione**                                              |
+| ------------- | ---------- | ------------------------------------------------------------ |
+| `&&`          | AND logico | Restituisce `1` solo se **entrambe** le condizioni sono vere |
+| \|\|          | OR logico  | Restituisce `1` se **almeno una** condizione è vera          |
+| `!`           | NOT logico | Inverte il valore di verità (vero diventa falso e viceversa) |
