@@ -1,0 +1,140 @@
+# Blocchi condizionali
+i blocchi condizionali servono a controllare il flusso del codice, in un certo senso ti permettono di decidere quale porzione di codice eseguire in quali condizioni
+## blocchi fondamentali
+### While
+
+Il while ripete tutto il contenuto delle parentesi graffe finché il confronto risulta essere vero.
+Dopo l'ultima iterazione del codice, se la condizione non è più soddisfatta, verrà ignorato tutto il contenuto delle parentesi e si proseguirà con l'esecuzione del programma.
+
+```c
+#inclide <stdio.h>
+
+main()
+{
+	int contatore = 0; //Dichiaro ed inizializzo la variabile
+	while (contatore < 10) //Finchè il contatore è minore di 10
+	{
+		contatore++;       //Incrementa il contatore
+	}
+	printf("&d",contatore);//Stampa il contatore
+	//verrà stamppato: 10
+}
+```
+
+
+### If
+
+L'if decide se un certo blocco viene eseguito o no.
+
+````c
+#inclide <stdio.h>
+
+main()
+{	
+	int età;
+	scanf("%d", &età ); //il carattere '&' indica l'indirizzo della variabile
+	if(età < 18)
+	{
+		printf("Devi essere maggiorenne");
+		return; //termina l'esecuzione del programma
+	}
+//IL RESTO DEL CODICE...
+}
+````
+
+Si può costruire un sistema più complesso con la parola ````else````
+
+````c
+
+	int età;
+	scanf("%d", &età );
+	if(età < 14)               //l'età inserita è minore di 14?
+	{
+		printf("Ciao bambino");
+	}
+	else if(età < 18).  // se non è vera la cosa precedente, controlliamo questa
+	{
+		printf("Ciao ragazzo");
+	}
+	else // se tutte le cose precedenti sono false allora esegui ciò
+	{
+		printf("Salve");
+	}
+//IL RESTO DEL CODICE...
+````
+
+## Elasticità
+
+Sono infiniti i modi in cui puoi combinare `if` ed `else`.
+Se vogliamo dirla tutta basta il while per costruire qualunque algoritmo, tuttavia si preferisce usare tutta una serie di strumenti che sintatticamente danno ordine; come `if`, `for`, `break` o `continue`.
+
+
+````c
+#inclide <stdio.h>
+
+main()
+{	
+	int pin;
+	int tentativi = 0;
+	bool sbloccato = false;
+	
+	printf("inserire pin")
+
+	while(tentativi < 5) //Do esattamente 5 tentativi
+	{
+		printf("tentativo numero: %d",tentativi);
+		scanf("%d", &pin );
+		if (pin == 1234) //se il pin inserito coincide con '1 2 3 4' accedi
+		{
+			sbloccato = true;
+			break; //esce immediatamente dal ciclo while
+		}
+		if (pin < 1 || pin > 9999) //  '||' è l'operatore logico 'or'
+		{                          // VERO SE ALMENO UNA DELLE DUE è VERA
+			printf("inserire un numero valido");
+			continue; //passa direttamente alla prossima iterazione del ciclo
+		}             //senza incrementare tentativi
+		tentativi++;
+	}
+	if(!sbloccato) //'!' indica 'not'; se 'sbloccato' è false, entra nel blocco      {
+		printf("troppi tentativi falliti");
+		return -1; //numeri diversi da 0 indicano errori di esecuzione
+	}
+	//IL RESTO DEL CODICE...
+}
+````
+
+## Blocchi derivati
+### For
+
+il `for` si può vedere come un particolare tipo di while, è utile quando vuoi eseguire un blocco di codice un numero di volte "prevedibile"
+
+````c
+for (int i = 0; i<10; i++) //1) inizializzazione della variabile
+{
+		printf("%d",i) //verrà stampato: 12345
+}
+````
+### Swith case
+
+lo `switch` è utile quando si prevedono alcuni casi specifici.
+è meno potente di un if multiplo perché i `case` possono essere solo valori fissi
+
+````c
+int scelta = 2;
+scanf("%D",&scelta);
+switch (scelta) {
+    case 1:
+        printf("Hai scelto il menu Avvio.\n");
+        break; // Fondamentale per uscire dallo switch!
+    case 2:
+        printf("Hai scelto le Impostazioni.\n");
+        break;
+    case 3:
+        printf("Hai scelto di Uscire.\n");
+        break;
+    default:
+        printf("Opzione non valida.\n"); // Eseguito se nessun caso corrisponde
+        break;
+}
+````

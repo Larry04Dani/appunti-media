@@ -11,6 +11,7 @@ import { Spoiler } from '@/components/spoiler'
 import { CodeCopy } from '@/components/code-copy'
 import { Riferimento } from '@/components/riferimento'
 import { P5Sketch } from '@/components/p5-sketch'
+import { GeoGebra } from '@/components/geogebra'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -63,5 +64,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Uso: <P5Sketch id="particles" width={600} height={280} />
     //      <P5Sketch id="lissajous" />
     P5Sketch,
+
+    // GEOGEBRA — applet interattiva GeoGebra (geometria, grafico, 3D, CAS…)
+    // Embed di materiale salvato:  <GeoGebra materialId="xC4Bnbap" />
+    // App grafica con comandi:     <GeoGebra appName="graphing" commands={["f(x)=x^2", "g(x)=2x"]} />
+    // App geometria vuota:         <GeoGebra appName="geometry" showToolBar={true} />
+    GeoGebra,
   }
 }
