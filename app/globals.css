@@ -27,6 +27,8 @@
   --foreground: #293443; /* Colore del testo primario */
   --primary: #2776ff;
   --secondary: #1a1a1f;
+  /* Altezza della navbar — usata per ancorare la sidebar esattamente sotto */
+  --navbar-h: 61px;
 }
 
 /* Integrazione con i font Geist di Next.js */

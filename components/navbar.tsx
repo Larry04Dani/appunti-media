@@ -3,7 +3,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 export function Navbar() {
   return (
-    <nav className="flex items-center justify-between py-4 mb-8 border-b border-gray-200 dark:border-gray-800 not-prose">
+    <nav className="relative z-50 bg-background flex items-center justify-between py-4 mb-8 border-b border-gray-200 dark:border-gray-800 not-prose">
       <div className="flex items-center gap-6">
         <Link 
           href="/" 

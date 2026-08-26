@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Importiamo icone comode per mostrare cartelle, file e bottoni di espansione
-import { ChevronRight, ChevronDown, Folder, FolderOpen, FileText, Menu, X, SidebarClose, SidebarOpen } from "lucide-react";
+import { ChevronRight, ChevronDown, Folder, FolderOpen, FileText } from "lucide-react";
 // Importiamo il Tipo della nostra struttura dati
 import { TreeNode } from "@/lib/get-notes-tree";
 
@@ -30,40 +30,40 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         Indentiamo dinamicamente in base a quanto siamo scesi nell'albero (level)
       */}
       <div 
-        className={`flex items-center gap-2 py-1.5 px-2 rounded-md transition-colors ${
+        className={`flex items-center gap-1.5 py-1 px-1.5 rounded-md transition-colors ${
           isActive ? "bg-primary/10 text-primary font-medium" : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
         }`}
-        style={{ paddingLeft: `${level * 12 + 8}px` }}
+        style={{ paddingLeft: `${level * 10 + 6}px` }}
       >
         {/* Pulsante freccina per espandere/collassare (solo se ci sono figli) */}
         {hasChildren ? (
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="p-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 shrink-0"
             aria-label="Espandi cartella"
           >
-            {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+            {isExpanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
           </button>
         ) : (
           // Spazio vuoto per allineare i file che non hanno la freccina
-          <div className="w-[18px]" />
+          <div className="w-[16px] shrink-0" />
         )}
 
         {/* Icona della cartella (se ha figli) o del file (se è una foglia) */}
         {hasChildren ? (
-          isExpanded ? <FolderOpen size={16} className="text-blue-500" /> : <Folder size={16} className="text-blue-500" />
+          isExpanded ? <FolderOpen size={14} className="text-blue-500 shrink-0" /> : <Folder size={14} className="text-blue-500 shrink-0" />
         ) : (
-          <FileText size={16} className="text-gray-400" />
+          <FileText size={14} className="text-gray-400 shrink-0" />
         )}
 
         {/* Nome del nodo. Se ha un URL è un link, altrimenti è solo testo cliccabile per espandere */}
         {node.url ? (
-          <Link href={node.url} className="flex-1 truncate text-sm">
+          <Link href={node.url} className="flex-1 truncate text-xs leading-tight">
             {node.name}
           </Link>
         ) : (
           <span 
-            className="flex-1 truncate text-sm cursor-pointer" 
+            className="flex-1 truncate text-xs leading-tight cursor-pointer" 
             onClick={() => setIsExpanded(!isExpanded)}
           >
             {node.name}
@@ -77,7 +77,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         aumentando il livello (che aumenterà l'indentazione).
       */}
       {hasChildren && isExpanded && (
-        <div className="flex flex-col mt-0.5">
+        <div className="flex flex-col">
           {node.children!.map((child, idx) => (
             <SidebarNode key={idx} node={child} level={level + 1} />
           ))}
@@ -96,33 +96,30 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
   // Partiamo con "true" di default (Sidebar visibile)
   const [isOpen, setIsOpen] = useState(true);
 
+  // Larghezza sidebar in px — usata sia per il pannello che per lo spacer
+  const SIDEBAR_W = 220;
+
   return (
     <>
       {/* 
-        Questo contenitore flessibile regola il suo spazio ("width").
-        Se `isOpen` è true, la sidebar è larga 256px (w-64).
-        Se `isOpen` è false, si restringe a 0px.
-        `transition-all` fa sì che l'apertura/chiusura sia un'animazione fluida.
+        Sidebar fissa sul bordo sinistro, che parte SOTTO la navbar.
+        `top: var(--navbar-h)` e `height: calc(100vh - var(--navbar-h))`
+        la mantengono ancorata esattamente all'area di contenuto.
       */}
-      <aside 
-        className={`relative shrink-0 border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out ${
-          isOpen ? "w-64 pr-4 opacity-100" : "w-0 opacity-0 overflow-hidden border-none pr-0"
+      <aside
+        className={`fixed left-0 z-40 bg-background border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ease-in-out flex flex-col ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{
+          width: `${SIDEBAR_W}px`,
+          top: "var(--navbar-h)",
+          height: "calc(100vh - var(--navbar-h))",
+        }}
       >
-        {/* Pulsante per CHIUDERE la sidebar (visibile solo se aperta) */}
-        {isOpen && (
-          <button 
-            onClick={() => setIsOpen(false)}
-            className="absolute top-0 right-2 p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
-            title="Nascondi menu"
-          >
-            <SidebarClose size={18} />
-          </button>
-        )}
-
-        <nav className="sticky top-8 flex flex-col gap-1 h-[calc(100vh-100px)] overflow-y-auto mt-8">
+        {/* Albero di navigazione scrollabile */}
+        <nav className="flex-1 overflow-y-auto pt-3 pb-2 px-1.5">
           {tree.length === 0 ? (
-            <p className="text-sm text-gray-500 italic px-2">Nessun appunto trovato.</p>
+            <p className="text-xs text-gray-500 italic px-2">Nessun appunto trovato.</p>
           ) : (
             tree.map((node, idx) => (
               <SidebarNode key={idx} node={node} />
@@ -132,21 +129,36 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
       </aside>
 
       {/* 
-        Pulsante per APRIRE la sidebar.
-        Viene mostrato solo se `isOpen` è false (sidebar chiusa).
-        Lo fissiamo sulla sinistra, così rimane sempre a portata di clic.
+        Tab di toggle — ancorato al bordo destro della sidebar, centrato
+        verticalmente nell'area sotto la navbar (non nell'intera viewport).
       */}
-      {!isOpen && (
-        <div className="shrink-0 pt-8 pr-4">
-          <button 
-            onClick={() => setIsOpen(true)}
-            className="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
-            title="Mostra menu"
-          >
-            <SidebarOpen size={20} />
-          </button>
-        </div>
-      )}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          left: isOpen ? `${SIDEBAR_W}px` : "0px",
+          top: "calc(var(--navbar-h) + (100vh - var(--navbar-h)) / 2)",
+        }}
+        className="fixed -translate-y-1/2 z-50 flex items-center justify-center w-5 h-10 bg-background border border-l-0 border-gray-200 dark:border-gray-700 rounded-r-md text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-[left,colors] duration-300 ease-in-out shadow-sm"
+        title={isOpen ? "Nascondi menu" : "Mostra menu"}
+        aria-label={isOpen ? "Nascondi menu" : "Mostra menu"}
+      >
+        <ChevronRight
+          size={13}
+          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
+        />
+      </button>
+
+      {/* 
+        Spacer invisibile nel flusso del documento:
+        occupa lo stesso spazio della sidebar fissa in modo che
+        il contenuto principale non finisca sotto di essa.
+        Si azzera con una transizione quando la sidebar è chiusa.
+      */}
+      <div
+        style={{ width: isOpen ? `${SIDEBAR_W}px` : "0px" }}
+        className="shrink-0 transition-all duration-300 ease-in-out"
+        aria-hidden="true"
+      />
     </>
   );
 }

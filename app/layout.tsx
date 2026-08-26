@@ -83,7 +83,7 @@ export default async function RootLayout({
             <Navbar />
             
             {/* Flex container per affiancare Sidebar (a sinistra) e Contenuto (a destra) */}
-            <div className="flex gap-4 lg:gap-8 pb-16 relative">
+            <div className="flex pb-16">
               
               {/* Passiamo l'albero letto dal server al componente Sidebar (che è Client) */}
               <Sidebar tree={tree} />
@@ -91,7 +91,7 @@ export default async function RootLayout({
               {/* Il tag <main> accoglie il file .mdx. 
                   'flex-1' gli fa occupare tutto lo spazio rimanente accanto alla sidebar.
                   'min-w-0' evita bug di overflow quando inserisci frammenti di codice molto lunghi. */}
-              <main className="flex-1 min-w-0 prose dark:prose-invert max-w-none
+              <main className="flex-1 min-w-0 pl-6 prose dark:prose-invert max-w-none
                 prose-headings:text-primary dark:prose-headings:text-primary
                 prose-h1:text-4xl prose-h1:font-extrabold 
                 prose-h2:text-3xl prose-h2:text-secondary prose-h2:font-bold dark:prose-h2:text-secondary

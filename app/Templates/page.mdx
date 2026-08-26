@@ -52,7 +52,98 @@ int main() {
 Essendo questo un file `.mdx` (e non solo `.md`), puoi usare direttamente l'HTML e le classi di Tailwind qui in mezzo!
 Ad esempio, questo è un blocco di testo personalizzato sul momento:
 
-
 <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 border-l-4 border-yellow-500 rounded my-4">
   <span className="font-bold text-yellow-700 dark:text-yellow-400">Nota Bene:</span> Questa è una nota creata inserendo un normale tag `<div>` dentro il file Markdown.
 </div>
+
+---
+
+## 4. Componenti Personalizzati
+
+Questa pagina mostra tutti i componenti disponibili nei file `.mdx`.
+Non devi importarli: sono registrati globalmente in `mdx-components.tsx`.
+
+### Callout
+
+<Callout type="definizione" title="Funzione continua">
+  Una funzione $f: A \to \mathbb{R}$ si dice **continua** in un punto $x_0 \in A$ se:
+  $$\lim_{x \to x_0} f(x) = f(x_0)$$
+</Callout>
+
+<Callout type="teorema">
+  In ogni triangolo rettangolo, il quadrato dell'ipotenusa è uguale alla somma dei quadrati dei cateti: $a^2 + b^2 = c^2$.
+</Callout>
+
+<Callout type="dimostrazione">
+  Sia $c$ l'ipotenusa. Costruiamo un quadrato di lato $a+b$...
+</Callout>
+
+<Callout type="attenzione">
+  Ricorda che questo teorema vale **solo** per i triangoli rettangoli!
+</Callout>
+
+<Callout type="nota">
+  Un buon approccio è verificare sempre le precondizioni prima di applicare il teorema.
+</Callout>
+
+<Callout type="esempio" title="Verifica con 3-4-5">
+  Con i cateti $a = 3$ e $b = 4$: $3^2 + 4^2 = 9 + 16 = 25 = 5^2$. ✓
+</Callout>
+
+### Riferimento
+
+<Riferimento href="/Appunti/1Anno/Analisi" title="Analisi 1 — Limiti">
+  Vedi la sezione sui limiti per la definizione formale di continuità.
+</Riferimento>
+
+<Riferimento href="https://it.wikipedia.org/wiki/Teorema_di_Pitagora" title="Wikipedia — Teorema di Pitagora" />
+
+### Spoiler
+
+**Domanda:** Qual è la complessità temporale del QuickSort nel caso peggiore?
+
+<Spoiler>
+  Nel caso peggiore (array già ordinato con pivot pessimo) è **O(n²)**.
+  Nel caso medio è O(n log n), che è il motivo per cui è comunque molto usato in pratica.
+</Spoiler>
+
+**Domanda:** Cosa afferma il Teorema degli zeri di Bolzano?
+
+<Spoiler title="Rivela il teorema">
+  Se $f$ è continua su $[a, b]$ e $f(a) \cdot f(b) < 0$, allora esiste almeno un punto
+  $c \in (a, b)$ tale che $f(c) = 0$.
+</Spoiler>
+
+### CodeCopy
+
+Il pulsante "Copia" appare automaticamente su ogni blocco di codice al hover.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int partition(std::vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+```
+
+```python
+def quicksort(arr: list) -> list:
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left  = [x for x in arr if x < pivot]
+    mid   = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + mid + quicksort(right)
+```
