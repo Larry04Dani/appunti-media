@@ -10,6 +10,7 @@ import { Callout } from '@/components/callout'
 import { Spoiler } from '@/components/spoiler'
 import { CodeCopy } from '@/components/code-copy'
 import { Riferimento } from '@/components/riferimento'
+import { P5Sketch } from '@/components/p5-sketch'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -56,5 +57,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Uso interno:  <Riferimento href="/Appunti/1Anno/Analisi" title="Analisi 1" />
     // Uso esterno:  <Riferimento href="https://wikipedia.org/..." title="Wikipedia" />
     Riferimento,
+
+    // P5SKETCH — box animato/interattivo con p5.js
+    // Gli sketch sono definiti in lib/sketches.ts e referenziati per nome.
+    // Uso: <P5Sketch id="particles" width={600} height={280} />
+    //      <P5Sketch id="lissajous" />
+    P5Sketch,
   }
 }
