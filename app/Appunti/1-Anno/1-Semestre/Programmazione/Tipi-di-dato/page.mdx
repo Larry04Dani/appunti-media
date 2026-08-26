@@ -1,0 +1,55 @@
+
+## 1. Integer Data Types
+
+| **Data Type**            | **Typical Size** | **Value Range (Approximate / Standard)**                    | **Format Specifier** | **Description**                  |
+| ------------------------ | ---------------- | ----------------------------------------------------------- | -------------------- | -------------------------------- |
+| `char`                   | 1 byte           | `-128` to `127` or `0` to `255`                             | `%c`                 | Single character / small integer |
+| `signed char`            | 1 byte           | `-128` to `127`                                             | `%c` or `%d`         | Explicitly signed character      |
+| `unsigned char`          | 1 byte           | `0` to `255`                                                | `%c` or `%u`         | Unsigned character / byte buffer |
+| `short` (or `short int`) | 2 bytes          | `-32,768` to `32,767`                                       | `%hd`                | Short integer                    |
+| `unsigned short`         | 2 bytes          | `0` to `65,535`                                             | `%hu`                | Unsigned short integer           |
+| `int`                    | 4 bytes          | `-2,147,483,648` to `2,147,483,647`                         | `%d` or `%i`         | Standard integer                 |
+| `unsigned int`           | 4 bytes          | `0` to `4,294,967,295`                                      | `%u`                 | Unsigned standard integer        |
+| `long` (or `long int`)   | 4 or 8 bytes     | `-2^31` to `2^31 - 1` (or `-2^63` to `2^63 - 1`)            | `%ld`                | Long integer                     |
+| `unsigned long`          | 4 or 8 bytes     | `0` to `2^32 - 1` (or `0` to `2^64 - 1`)                    | `%lu`                | Unsigned long integer            |
+| `long long`              | 8 bytes          | `-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807` | `%lld`               | At least 64-bit integer (C99)    |
+| `unsigned long long`     | 8 bytes          | `0` to `18,446,744,073,709,551,615`                         | `%llu`               | Unsigned 64-bit integer (C99)    |
+
+## 2. Floating-Point & Real Types
+
+|**Data Type**|**Typical Size**|**Precision**|**Value Range**|**Format Specifier**|**Description**|
+|---|---|---|---|---|---|
+|`float`|4 bytes|~6–9 decimal digits|`1.2E-38` to `3.4E+38`|`%f`|Single-precision floating point|
+|`double`|8 bytes|~15–17 decimal digits|`2.3E-308` to `1.7E+308`|`%lf`|Double-precision floating point|
+|`long double`|10, 12, or 16 bytes|~19–34 decimal digits|`3.4E-4932` to `1.1E+4932`|`%Lf`|Extended-precision floating point|
+
+## 3. Special & Boolean Types
+
+|**Data Type**|**Typical Size**|**Valid Values**|**Format Specifier**|**Header / Standard**|**Description**|
+|---|---|---|---|---|---|
+|`_Bool`|1 byte|`0` or `1`|`%d`|Built-in (C99)|Native boolean representation|
+|`bool`|1 byte|`true` (1) or `false` (0)|`%d`|`<stdbool.h>` (C99)|Macro alias for `_Bool`|
+|`void`|0 bytes|None|N/A|Core Language|Represents an empty or non-existent value|
+
+## 4. Derived & Composite Types
+
+|**Type Construct**|**Example Syntax**|**Description**|
+|---|---|---|
+|**Pointer**|`int *ptr;`|Stores the memory address of another variable (`%p`).|
+|**Array**|`int arr[10];`|Sequential collection of fixed-size elements of the same type.|
+|**Structure**|`struct Point { int x; int y; };`|User-defined aggregate of variables under one name.|
+|**Union**|`union Data { int i; float f; };`|User-defined type where members share the exact same memory space.|
+|**Enum**|`enum Color { RED, GREEN, BLUE };`|User-defined type consisting of named integer constants.|
+|**Function Pointer**|`int (*func)(int, int);`|Pointer storing the address of executable function code.|
+
+## 5. Fixed-Width Integer Types (`<stdint.h>`)
+
+Introduced in **C99** to guarantee exact bit widths across different platforms and compilers:
+
+|**Data Type**|**Exact Width**|**Signed Range**|**Unsigned Counterpart**|
+|---|---|---|---|
+|`int8_t`|8 bits (1 byte)|`-128` to `127`|`uint8_t` (`0` to `255`)|
+|`int16_t`|16 bits (2 bytes)|`-32,768` to `32,767`|`uint16_t` (`0` to `65,535`)|
+|`int32_t`|32 bits (4 bytes)|`-2,147,483,648` to `2,147,483,647`|`uint32_t` (`0` to `4,294,967,295`)|
+|`int64_t`|64 bits (8 bytes)|`-9.22E18` to `9.22E18`|`uint64_t` (`0` to `1.84E19`)|
+|`intptr_t`|Pointer width|Platform dependen|

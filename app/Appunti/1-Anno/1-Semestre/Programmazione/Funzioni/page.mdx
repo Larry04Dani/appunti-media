@@ -1,0 +1,23 @@
+# Funzioni
+le funzioni servono ad eseguire un blocco di codice a "chiamata".
+può ricevere parametri e restituire dei valori
+
+````c
+int Somma(int num1, int num2) // siccome la compilazione avviene dall'
+{                             // alto al basso, le funzioni vanno scritte prima 
+	return num1 + num2;       // del main
+} 
+
+main()
+{
+	int a,b;            //il tipo deve essere coerente con 
+	
+	scanf("%d", &a);
+	scanf("%d", &b);
+	
+	int c = somma(a,b); //dato che la funzione restituisce un intero posso 
+	                    //assegnare il valore a quella variabile
+	
+	printf("c") //stamperà la somma di a e b
+}
+````
