@@ -96,7 +96,7 @@ export default async function RootLayout({
                 prose-h1:text-4xl prose-h1:font-extrabold 
                 prose-h2:text-3xl prose-h2:text-secondary prose-h2:font-bold dark:prose-h2:text-secondary
                 prose-a:text-blue-500 hover:prose-a:text-blue-400
-                prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:rounded prose-code:px-1
+                prose-code:rounded prose-code:px-1
               ">
                 {children}
               </main>

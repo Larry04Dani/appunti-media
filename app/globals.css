@@ -25,8 +25,8 @@
 :root {
   --background: #c8d4e1;
   --foreground: #293443; /* Colore del testo primario */
-  --primary: #2a346f;
-  --secondary: #3f4f7c;
+  --primary: #2776ff;
+  --secondary: #1a1a1f;
 }
 
 /* Integrazione con i font Geist di Next.js */
@@ -46,9 +46,10 @@
 */
 .dark {
   --background: #18181a;
-  --foreground: #c8c5b4;
-  --primary: #ffbe27;
-  --secondary: #e7e78d;
+  --foreground: #b4bcc8;
+  --primary: #2776ff;
+  --secondary: #cde7ff;
+
 }
 
 /* Applica i colori di sfondo e del testo decisi sopra all'intero corpo della pagina */

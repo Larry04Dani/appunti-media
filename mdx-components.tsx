@@ -3,39 +3,58 @@ import type { MDXComponents } from 'mdx/types'
 // Questo file è vitale per usare @next/mdx. 
 // Ti permette di mappare i normali tag HTML (generati dal tuo Markdown)
 // su componenti React personalizzati.
-// Risorsa: https://nextjs.org/docs/app/building-your-application/configuring/mdx#add-an-mdx-componentstsx-file
+// Risorsa: https://nextjs.org/docs/app/building-your-application/configuring/mdx
+
+// Importiamo i nostri tre nuovi componenti personalizzati
+import { Callout } from '@/components/callout'
+import { Spoiler } from '@/components/spoiler'
+import { CodeCopy } from '@/components/code-copy'
+import { Riferimento } from '@/components/riferimento'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     // I componenti base passati da Next.js
     ...components,
 
-    // ESEMPIO DI PERSONALIZZAZIONE (attualmente commentato):
-    // Se togliessi i commenti, ogni titolo # (h1) nei tuoi appunti diventerebbe verde e grassetto.
-    // h1: ({ children }) => (
-    //   <h1 className="text-5xl font-black text-green-500 mb-6">{children}</h1>
-    // ),
-    
-    // ESEMPIO CITAZIONE (Blockquote):
-    // Trasforma i > del markdown in dei bei box di avviso grigi.
-    // blockquote: ({ children }) => (
-    //   <blockquote className="border-l-4 border-gray-400 bg-gray-100 p-4 rounded italic">
-    //     {children}
-    //   </blockquote>
-    // ),
-
-    // GESTIONE TABELLE RESPONSIVE:
-    // Questa funzione intercetta ogni tabella `<table>` creata in Markdown/Obsidian.
-    // La avvolge in un `<div>` con la classe `overflow-x-auto`.
-    // In questo modo, se la tabella ha troppe colonne, l'utente potrà scorrerla lateralmente su mobile
-    // anziché rompere l'impaginazione del sito o tagliarla.
+    // ─── TABELLE RESPONSIVE ──────────────────────────────────────────────────
+    // Intercettiamo ogni <table> del Markdown e la avvolgiamo in un div scrollabile.
+    // Se la tabella è troppo larga per lo schermo, l'utente potrà scorrerla 
+    // in orizzontale senza rompere il layout della pagina.
     table: ({ children }) => (
       <div className="overflow-x-auto w-full border border-gray-200 dark:border-gray-800 rounded-lg my-6">
-        {/* Usiamo table-auto per far sì che la tabella si auto-adatti al contenuto */}
         <table className="w-full text-sm text-left my-0 divide-y divide-gray-200 dark:divide-gray-800">
           {children}
         </table>
       </div>
     ),
+
+    // ─── BLOCCHI DI CODICE CON PULSANTE COPIA ───────────────────────────────
+    // Intercettiamo ogni tag <pre> generato automaticamente da rehype-pretty-code
+    // (il plugin che colora la sintassi dei blocchi ```linguaggio```).
+    // Lo sostituiamo con il nostro componente CodeCopy, che aggiunge il pulsante
+    // "Copia" in alto a destra visibile al hover.
+    // NOTA: Non usiamo <CodeCopy> direttamente nei file .mdx, viene attivato in automatico!
+    pre: ({ children, ...props }) => (
+      <CodeCopy {...props}>{children}</CodeCopy>
+    ),
+
+    // ─── COMPONENTI DA USARE DIRETTAMENTE NEI FILE .MDX ─────────────────────
+    // Questi vengono esportati come tag JSX direttamente utilizzabili nei tuoi appunti.
+    // Non devi importarli manualmente in ogni file .mdx: funzionano "magicamente" 
+    // perché sono registrati qui a livello globale.
+
+    // CALLOUT — per definizioni, teoremi, note, avvisi, ecc.
+    // Uso: <Callout type="teorema" title="Teorema di Pitagora">...</Callout>
+    // Tipi disponibili: definizione | teorema | dimostrazione | attenzione | nota | esempio
+    Callout,
+
+    // SPOILER — per nascondere risposte durante il ripasso
+    // Uso: <Spoiler title="Mostra risposta">Il contenuto nascosto...</Spoiler>
+    Spoiler,
+
+    // RIFERIMENTO — link a pagine interne o esterne con titolo in evidenza
+    // Uso interno:  <Riferimento href="/Appunti/1Anno/Analisi" title="Analisi 1" />
+    // Uso esterno:  <Riferimento href="https://wikipedia.org/..." title="Wikipedia" />
+    Riferimento,
   }
 }

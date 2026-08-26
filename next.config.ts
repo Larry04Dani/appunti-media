@@ -16,7 +16,7 @@ const withMDX = nextMDX({
     // PLUGIN REHYPE (Operano sul risultato HTML)
     // - rehype-katex: Trasforma le equazioni riconosciute prima in HTML stilizzato per la matematica.
     // - rehype-pretty-code: Prende i blocchi di codice (es. ```cpp) e li colora con il tema scelto.
-    rehypePlugins: ['rehype-katex', ['rehype-pretty-code', { theme: 'github-dark' }]],
+    rehypePlugins: ['rehype-katex', ['rehype-pretty-code', { theme: 'gruvbox-dark-medium' }]],
   },
 })
 
