@@ -147,3 +147,58 @@ body {
 .prose :not(pre) > code::after {
   content: none;
 }
+
+/* ─── STILE PERSONALIZZATO DEI LINK ─────────────────────────────────────────
+   Sovrascriviamo il comportamento di default di Tailwind Typography per i tag <a>
+   dentro le aree .prose (dove vive il testo dei tuoi appunti).
+
+   Strategia visiva:
+   - Tema CHIARO : colore primary, sottolineatura tratteggiata discreta.
+                   Hover → sottolineatura continua + sfondo tinto leggerissimo.
+   - Tema SCURO  : stessa logica, ma sottolineatura più luminosa e sfondo più caldo.
+   - Link VISITATI: leggermente desaturati ("già letto").
+
+   Il vantaggio di usare `var(--primary)` è che lo stile si adatta automaticamente
+   a TUTTI i tuoi temi (rose, sage, latte, lavender, nord) senza dover scrivere
+   regole separate per ognuno!
+
+   `color-mix()` è una funzione CSS moderna che mescola due colori.
+   Es: color-mix(in srgb, var(--primary) 10%, transparent)
+       → prende il 10% del colore primary e lo fonde con il trasparente.
+*/
+
+/* TEMA CHIARO — stile base */
+.prose a {
+  color: var(--primary);
+  text-decoration: none;              /* Nessuna sottolineatura di default */
+  font-weight: 700;                   /* Grassetto */
+  border-radius: 3px;
+  transition: background-color 0.15s ease, text-decoration 0.15s ease;
+}
+
+/* TEMA CHIARO — hover */
+.prose a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  padding-inline: 2px;
+}
+
+/* TEMA SCURO — differenze rispetto al chiaro */
+.dark .prose a {
+  /* Nel dark la sottolineatura di default è semi-trasparente per non "urlare" */
+  text-decoration-color: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+.dark .prose a:hover {
+  /* Sfondo leggermente più opaco nel dark */
+  background-color: color-mix(in srgb, var(--primary) 18%, transparent);
+  text-decoration-color: var(--primary); /* Al hover torna piena */
+}
+
+/* Link visitati: leggermente desaturati per indicare "già visto" */
+.prose a:visited {
+  color: color-mix(in srgb, var(--primary) 70%, var(--foreground));
+}

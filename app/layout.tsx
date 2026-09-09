@@ -38,6 +38,7 @@ export const metadata: Metadata = {
 import { buildTree } from "@/lib/get-notes-tree";
 import path from "path";
 import { Sidebar } from "@/components/sidebar";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 // Ora la funzione è "async" (asincrona) perché deve leggere il disco (filesystem)
 export default async function RootLayout({
@@ -95,9 +96,14 @@ export default async function RootLayout({
                 prose-headings:text-primary dark:prose-headings:text-primary
                 prose-h1:text-4xl prose-h1:font-extrabold 
                 prose-h2:text-3xl prose-h2:text-secondary prose-h2:font-bold dark:prose-h2:text-secondary
-                prose-a:text-blue-500 hover:prose-a:text-blue-400
                 prose-code:rounded prose-code:px-1
               ">
+                {/* 
+                  Breadcrumbs: la "traccia" che mostra dove si trova l'utente nell'albero del sito.
+                  Es: Home › Appunti › 1Anno › Analisi
+                  Si nasconde automaticamente nella homepage (restituisce null se pathname === "/").
+                */}
+                <Breadcrumbs />
                 {children}
               </main>
 
