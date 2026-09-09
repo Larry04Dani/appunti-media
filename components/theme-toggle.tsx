@@ -21,6 +21,7 @@ export function ThemeToggle() {
   // Serve ad evitare un errore tecnico detto "Hydration Mismatch" (ovvero il server che 
   // aveva disegnato un sole e il tuo browser che, preferendo il tema dark, disegna una luna).
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -33,14 +34,14 @@ export function ThemeToggle() {
     // Il bottone reagisce al click cambiando il tema tra "dark" e "light"
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+      className="p-2 rounded-md hover:bg-primary/10 hover:text-primary transition-colors text-foreground/70"
       aria-label="Toggle theme"
     >
       {/* Se il tema è dark mostra il sole (per poter tornare alla luce), altrimenti mostra la luna */}
       {theme === "dark" ? (
-        <Sun className="h-5 w-5 text-yellow-500" />
+        <Sun className="h-5 w-5" />
       ) : (
-        <Moon className="h-5 w-5 text-gray-700" />
+        <Moon className="h-5 w-5" />
       )}
     </button>
   );

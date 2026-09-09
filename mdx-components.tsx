@@ -39,6 +39,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <CodeCopy {...props}>{children}</CodeCopy>
     ),
 
+    // ─── CODICE INLINE ───────────────────────────────────────────────────────
+    // Intercettiamo <code> per stilare il codice inline (es. `variabile`).
+    // I blocchi fenced (```...```) generano un <code data-language="..."> dentro
+    // un <pre> già gestito da CodeCopy: li lasciamo passare invariati.
+    code: ({ children, ...props }) => {
+      // Se ha data-language, è dentro un blocco fenced → non toccare
+      const isBlock = 'data-language' in props;
+      if (isBlock) return <code {...props}>{children}</code>;
+
+      return (
+        <code
+          className="bg-gray-200/70 dark:bg-gray-700/60 text-primary dark:text-primary font-mono text-[0.85em] rounded px-1.5 py-0.5"
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    },
+
     // ─── COMPONENTI DA USARE DIRETTAMENTE NEI FILE .MDX ─────────────────────
     // Questi vengono esportati come tag JSX direttamente utilizzabili nei tuoi appunti.
     // Non devi importarli manualmente in ogni file .mdx: funzionano "magicamente" 

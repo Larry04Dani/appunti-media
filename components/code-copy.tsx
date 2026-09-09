@@ -62,10 +62,11 @@ export function CodeCopy({ children, className, ...props }: CodeCopyProps) {
         onClick={handleCopy}
         className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-1.5
           text-xs font-medium rounded-md
-          bg-gray-700/80 text-gray-300
+          bg-gray-700/50 text-gray-300
           hover:bg-gray-600 hover:text-white
+          focus:outline-none focus:ring-2 focus:ring-primary
           opacity-0 group-hover:opacity-100
-          transition-all duration-200"
+          transition-all duration-200 backdrop-blur-sm"
         aria-label="Copia codice"
       >
         {copied ? (

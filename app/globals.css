@@ -51,12 +51,99 @@
   --foreground: #b4bcc8;
   --primary: #2776ff;
   --secondary: #cde7ff;
+}
 
+/* Tema Rose (Pastello Rosa) */
+:root[data-theme="rose"] {
+  --background: #fffafa;
+  --body-bg: #fff0f3;
+  --foreground: #4a3b42;
+  --primary: #d97a96;
+  --secondary: #9e6073;
+}
+:root[data-theme="rose"].dark {
+  --background: #1c1417;
+  --body-bg: #140d10;
+  --foreground: #ebdce0;
+  --primary: #f29bb5;
+  --secondary: #b57c8d;
+}
+
+/* Tema Sage (Pastello Verde/Menta) */
+:root[data-theme="sage"] {
+  --background: #f7fbf8;
+  --body-bg: #edf2ee;
+  --foreground: #344038;
+  --primary: #639c76;
+  --secondary: #4b6654;
+}
+:root[data-theme="sage"].dark {
+  --background: #121814;
+  --body-bg: #0b0f0c;
+  --foreground: #dbebe0;
+  --primary: #85c49a;
+  --secondary: #63856e;
+}
+
+/* Tema Latte (Neutro Caldo) */
+:root[data-theme="latte"] {
+  --background: #ffffff;
+  --body-bg: #f9f6f0;
+  --foreground: #4a453f;
+  --primary: #c28851;
+  --secondary: #8c6e53;
+}
+:root[data-theme="latte"].dark {
+  --background: #1f1d1b;
+  --body-bg: #141312;
+  --foreground: #e6e0d8;
+  --primary: #d19a66;
+  --secondary: #968371;
+}
+
+/* Tema Lavender (Pastello Lilla) */
+:root[data-theme="lavender"] {
+  --background: #fdfcff;
+  --body-bg: #f2eff7;
+  --foreground: #3d3b4a;
+  --primary: #9482c9;
+  --secondary: #6c5e8c;
+}
+:root[data-theme="lavender"].dark {
+  --background: #18161c;
+  --body-bg: #100f14;
+  --foreground: #e0dced;
+  --primary: #b3a1ed;
+  --secondary: #8a7cba;
+}
+
+/* Tema Nord (Artico) - Tinte fredde e riposanti */
+:root[data-theme="nord"] {
+  --background: #eceff4;
+  --body-bg: #e5e9f0;
+  --foreground: #2e3440;
+  --primary: #5e81ac;
+  --secondary: #4c566a;
+}
+:root[data-theme="nord"].dark {
+  --background: #3b4252;
+  --body-bg: #2e3440;
+  --foreground: #eceff4;
+  --primary: #88c0d0;
+  --secondary: #d8dee9;
 }
 
 /* Applica i colori di sfondo e del testo decisi sopra all'intero corpo della pagina */
 body {
-  background: var(--background);
+  background: var(--body-bg, var(--background));
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* Rimuove i backtick decorativi che Tailwind Typography aggiunge
+   automaticamente prima e dopo ogni elemento <code> inline. */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
 }

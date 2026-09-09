@@ -1,0 +1,27 @@
+# Librerie
+le librerie non sono altro che codice contenuto in un altro file, 'impacchettato' e disponibile ad essere riutilizzato in qualunque altro file `C`.
+
+Vanno importate allinizio del codice, così da dire al compilatore: "guarda che nel codice che ho scritto ci saranno risorse definite in questa libreria".
+
+Per importare una libreria **standard** nel tuo codice è sufficente inludere l'header della libreria
+```c
+#include <libreria.h>
+```
+<Callout type='attenzione'>Spesso ci si riferisce all'header come se fosse esso stesso la libreria. In realtà l'header contiene solo le dichiarazioni delle funzioni, le funzioni reali si troveranno in un file binario (già compilato) con un estensione differente </Callout>
+
+## Dove si trovano le librerie
+Per rispondere è importante fare una distinzione importante, esistono due tipi di librerie:
+- librerie standard, che sono già presenti nel tuo computer
+- librerie "personali" che puoi scrivere o importare nella cartella del progetto
+
+la posizione e l'estensione delle librerie standard dipende dal sistema operativo, non è importante ai fini didattici sapere dove sono esattamente collocate, l'importante è sapere che tutti i file di libreria sono collocati in un unico percorso nel tuo computer, e che quindi il compilatore sa autonomamente dove andare a cercare.
+
+le librerie personali, normalmente si trovano nella cartella del progetto, e servono essenzialmente a far comunicare i vari file.
+
+## Linking
+
+
+### La libreria principale
+```c
+#include <stdio.h> 
+```

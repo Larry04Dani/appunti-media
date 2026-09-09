@@ -8,7 +8,6 @@ import "./globals.css";
 
 // Importa i nostri componenti per il tema (Chiaro/Scuro)
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 // Importa la barra di navigazione (Navbar) che abbiamo creato
 import { Navbar } from "@/components/navbar";
@@ -77,10 +76,11 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Navbar a larghezza intera e sticky */}
+          <Navbar />
+
           {/* Contenitore principale centrato, largo al massimo 1280px (max-w-7xl) */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            
-            <Navbar />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8">
             
             {/* Flex container per affiancare Sidebar (a sinistra) e Contenuto (a destra) */}
             <div className="flex pb-16">

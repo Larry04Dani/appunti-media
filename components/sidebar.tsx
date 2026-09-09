@@ -31,7 +31,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
       */}
       <div 
         className={`flex items-center gap-1.5 py-1 px-1.5 rounded-md transition-colors ${
-          isActive ? "bg-primary/10 text-primary font-medium" : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+          isActive ? "bg-primary/10 text-primary font-medium" : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
         }`}
         style={{ paddingLeft: `${level * 10 + 6}px` }}
       >
@@ -39,7 +39,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         {hasChildren ? (
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 shrink-0"
+            className="p-0.5 rounded hover:bg-primary/20 shrink-0"
             aria-label="Espandi cartella"
           >
             {isExpanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
@@ -51,9 +51,9 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
 
         {/* Icona della cartella (se ha figli) o del file (se è una foglia) */}
         {hasChildren ? (
-          isExpanded ? <FolderOpen size={14} className="text-blue-500 shrink-0" /> : <Folder size={14} className="text-blue-500 shrink-0" />
+          isExpanded ? <FolderOpen size={14} className="text-primary shrink-0" /> : <Folder size={14} className="text-primary shrink-0" />
         ) : (
-          <FileText size={14} className="text-gray-400 shrink-0" />
+          <FileText size={14} className="text-primary/60 shrink-0" />
         )}
 
         {/* Nome del nodo. Se ha un URL è un link, altrimenti è solo testo cliccabile per espandere */}
@@ -138,7 +138,7 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
           left: isOpen ? `${SIDEBAR_W}px` : "0px",
           top: "calc(var(--navbar-h) + (100vh - var(--navbar-h)) / 2)",
         }}
-        className="fixed -translate-y-1/2 z-50 flex items-center justify-center w-5 h-10 bg-background border border-l-0 border-gray-200 dark:border-gray-700 rounded-r-md text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-[left,colors] duration-300 ease-in-out shadow-sm"
+        className="fixed -translate-y-1/2 z-50 flex items-center justify-center w-5 h-10 bg-background border border-l-0 border-gray-200 dark:border-gray-700 rounded-r-md text-foreground/50 hover:text-primary hover:bg-primary/10 transition-[left,colors] duration-300 ease-in-out shadow-sm"
         title={isOpen ? "Nascondi menu" : "Mostra menu"}
         aria-label={isOpen ? "Nascondi menu" : "Mostra menu"}
       >
