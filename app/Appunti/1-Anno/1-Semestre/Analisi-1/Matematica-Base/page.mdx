@@ -1,0 +1,65 @@
+# Matematica Di Base
+## Fondamenti di Logica
+La logica è quella disciplina che si occupa di analizzare e strutturare **proposizioni**, che possono assumere due valori di verità: Vero o Falso.
+
+
+
+- $P$ è un predicato, ovvero una caratteristica o un evento, che può essere vero o falso.
+
+Un esempio di predicato può essere: "il sole splende"
+
+- $\lnot P$ è la sua negazione
+
+Se consideriamo $P$ uguale a "il sole splende", la sua negazione $\lnot P$ significa indicativamente: "il sole non splende"
+
+E' possibile creare una proposizione logica unendo dei predicati con degli **operatori** logici ed attribuirne un valore di verità complessivo in base ai valori dei predicati
+
+$P$ e $Q$ sono due predicati, di seguito fornitò una serie di esempi esplicativi:
+
+- $P \land Q$ Operatore **AND**, questa proposizione è vera solo se lo sono entrambi i predicati
+- $P \lor Q$ Operatore **OR**, questa proposizione è vera se almeno uno dei 2 predicati è vero
+- $P \Rightarrow Q$ Operatore di **implicazione**, questa proposizione è falsa solo se $P$ è vera e $Q$ è falsa
+
+E' possibile tenere traccia degli stati di verità tramite una semblice *tabella di verità*:
+| P | Q | P ∧ Q (AND) | P ∨ Q (OR) | P → Q (Implicazione) |
+|:---:|:---:|:-----------:|:----------:|:--------------------:|
+|  V  |  V  |      V      |     V      |          V           |
+|  V  |  F  |      F      |     V      |          F           |
+|  F  |  V  |      F      |     V      |          V           |
+|  F  |  F  |      F      |     F      |          V           |
+
+
+<Callout type="nota">Da notare che l'impicazione può essere scritta come unione di più **AND**, **OR** e **NOT**, riesci a trovare una formula che gli equivale? <Spoiler>$\lnot(P \land \lnot Q)$</Spoiler> </Callout>
+
+### Logica del primo ordine ed insiemi
+
+Esistono altri strumenti logici che rendono il gioco ancora più interessante, introduciamo:
+
+#### Quantificatori
+I quantificatori sono universale o esistenziali:
+- $\forall$ e $\lnot \exist$ che significano rispettivamente: **per ogni** e **non esiste**
+- $\exist$ e $\lnot \forall$ rispetivamente: **esiste un** e **non per ogni**
+#### Variabili ed insiemi
+Un insieme è una collezione di oggetti che condividono alcune caratteristiche o che sono raggruppati secondo una regola particolare  
+Mentre una variabile simboleggia un elemento "qualunque" dell'insieme
+
+il simbolo $\in$ sta ad indicare che un certo elemento **appartiene** ad un insieme
+
+Scelto un dominio dove le proposizioni logiche posso operare è possibile quantificare gli oggetti all'interno di una formula
+
+Ad esempio posso affermare che **tutti** gli uomini sono mortali in questo modo:
+$$
+\forall x \in U, M(x)
+$$
+
+Dove $U$ è l'insieme degli uomini e $M$ è un predicato che significa "è mortale".
+
+## Insiemi numerici
+
+### operazioni tra insiemi
+#### relazione
+#### operazione
+#### funzione
+
+
+
