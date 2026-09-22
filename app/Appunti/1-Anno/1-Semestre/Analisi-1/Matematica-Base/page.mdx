@@ -70,6 +70,7 @@ Similmente alle proposizioni logiche è possibile fare operazioni tra insiemi, e
 - Intersezione, che si indica con $\cap$ e può essere definita così: $\forall x ( x \in (A \cap B)$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B))$
 - Unione, che si indica con $\cup$ e può essere definita così: $\forall x (x \in (A \cup B) \Leftrightarrow( x \in A) \lor (x \in B))$ 
 - Differenza, che si indica con $\setminus$ e può essere definita così: $ \forall x ( x \in (A \setminus B) \Leftrightarrow (x \in A) \land \lnot(x \in B))$
+- Complementare, si indica con $A^c$, e può essere definita così: $\forall x (x \in A^c \Leftrightarrow (x \in $<Tooltip text="Insieme Universo relativo, ovvero l'inseme che contiene tutti gli elementi di un contesto">U</Tooltip>$)\land(x \lnot \in A))$
 
 Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
 - $A \subset B$ significa che A è un sottoinsieme di B, ovvero: $(\forall x \in A, x \in B)$ <Tooltip text="Questa parte serve ad escludere il caso in cui anche tutti gli elementi di B appartengono ad A ">$\land \lnot(\forall x \in B, x \in B) $ </Tooltip>
@@ -78,7 +79,24 @@ Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
 Gli insiemi possono essere definiti in due modi:
 - Elencandone ogni elemento $A = \{a_1, a_2, a_3...a_n\}$
 - Definendo una regola di appartenenza $A = \{x \in B : P(x)\}$
-Esiste un particolare tipo di insieme chiamato insieme vuoto (che non contiene elementi) e si indica così: $\emptyset$
+
+### Costruzione insiemistica dei numeri Naturali
+Esiste un particolare tipo di insieme chiamato insieme vuoto (che non contiene elementi) e si indica così: $\emptyset$  
+Nessuno ci vieta di avere un insieme il cui unico elemento è l'insieme vuoto
+$$
+\{\emptyset\}
+$$
+Allora possiamo creare un insieme che contiene sia l'insieme precedente che l'inseme vuoto
+$$
+\{\emptyset,\{\emptyset\}\}
+$$
+Formalizziamo la successione così
+<Tooltip text= "S() è un operatore che indica l'elemento successivo">
+$$
+S(n)=n\cup\{n\}
+$$
+</Tooltip>
+<Wip />
 #### relazione 
 #### operazione
 #### funzione

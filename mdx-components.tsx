@@ -12,6 +12,7 @@ import { CodeCopy } from '@/components/code-copy'
 import { Riferimento } from '@/components/riferimento'
 import { P5Sketch } from '@/components/p5-sketch'
 import { Tooltip } from '@/components/tooltip'
+import { Wip } from '@/components/wip'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -87,5 +88,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // TOOLTIP — box informativo con freccetta che appare sopra una parola o frase
     // Uso: <Tooltip text="Questo è un processo NP-completo">algoritmo esponenziale</Tooltip>
     Tooltip,
+
+    // WIP — barra orizzontale con pattern a strisce gialle e nere (lavori in corso)
+    // Uso: <Wip /> oppure <Wip text="Lavori in corso" />
+    Wip,
   }
 }
