@@ -50,7 +50,6 @@ export function P5Sketch({ id, width = 600, height = 300, className = "" }: P5Sk
     return () => {
       instance?.remove();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

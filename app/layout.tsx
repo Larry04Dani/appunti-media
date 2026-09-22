@@ -70,7 +70,7 @@ export default async function RootLayout({
         ATTENZIONE: Le classi 'prose' sono state spostate più in basso, nel tag <main>.
         Se le lasciassimo nel <body>, influenzerebbero lo stile della Sidebar rovinandola!
       */}
-      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col overflow-x-hidden">
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans bg-background text-foreground antialiased min-h-screen flex flex-col overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

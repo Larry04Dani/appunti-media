@@ -19,14 +19,15 @@ $P$ e $Q$ sono due predicati, di seguito fornitò una serie di esempi esplicativ
 - $P \land Q$ Operatore **AND**, questa proposizione è vera solo se lo sono entrambi i predicati
 - $P \lor Q$ Operatore **OR**, questa proposizione è vera se almeno uno dei 2 predicati è vero
 - $P \Rightarrow Q$ Operatore di **implicazione**, questa proposizione è falsa solo se $P$ è vera e $Q$ è falsa
+- $P \Leftrightarrow Q$ Operatore di **doppi implicazione**, questa proposizione è vera se $P$ e $Q$ sono entrambe vere o false
 
 E' possibile tenere traccia degli stati di verità tramite una semblice *tabella di verità*:
-| P | Q | P ∧ Q (AND) | P ∨ Q (OR) | P → Q (Implicazione) |
-|:---:|:---:|:-----------:|:----------:|:--------------------:|
-|  V  |  V  |      V      |     V      |          V           |
-|  V  |  F  |      F      |     V      |          F           |
-|  F  |  V  |      F      |     V      |          V           |
-|  F  |  F  |      F      |     F      |          V           |
+| P | Q | P ∧ Q  | P ∨ Q  | P → Q  | P ⇔ Q 
+|:---:|:---:|:-----------:|:----------:|:--------------------:|:-:|
+|  V  |  V  |      V      |     V      |          V           | V |
+|  V  |  F  |      F      |     V      |          F           | F |
+|  F  |  V  |      F      |     V      |          V           | F |
+|  F  |  F  |      F      |     F      |          V           | V |
 
 
 <Callout type="nota">Da notare che l'impicazione può essere scritta come unione di più **AND**, **OR** e **NOT**, riesci a trovare una formula che gli equivale? <Spoiler>$\lnot(P \land \lnot Q)$</Spoiler> </Callout>
@@ -52,12 +53,28 @@ $$
 \forall x \in U, M(x)
 $$
 
-Dove $U$ è l'insieme degli uomini e $M$ è un predicato che significa "è mortale".
+Dove $U$ è l'insieme degli uomini e $M$ è un predicato che significa "è mortale".  
+Il classico sillogismo aristotelico:
+- Tutti gli uomini sono mortali
+- Socrate è un uomo
+- Socrate è mortale
 
+Può essere formalizzato in questo modo
+$$
+(\forall x \in U, M(x)) \land (Socrate \in U) \Rightarrow M(Socrate)
+$$
 ## Insiemi numerici
 
 ### operazioni tra insiemi
-#### relazione
+Similmente alle proposizioni logiche è possibile fare operazioni tra insiemi, esse vengono chiamate:
+- Intersezione, che si indica con $\cap$ e può essere definita così: $ A \cap B$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B)$
+- Unione, che si indica con $\cup$ e può essere definita così: $A \cup B \Leftrightarrow( x \in A) \lor (x \in B)$ 
+- Differenza, che si indica con $\setminus$ e può essere definita così: $ A \setminus B \Leftrightarrow (x \in A) \land \lnot(x \in B)$
+
+Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
+- $A \subset B$ significa che A è un sottoinsieme di B, ovvero: $(\forall x \in A, x \in B)$ <Tooltip text="Questa parte serve ad escludere il caso in cui anche tutti gli elementi di B appartengono ad A ">$\land \lnot(\forall x \in B, x \in B) $ </Tooltip>
+- $A \subseteq B$ significa che A è sottoinsieme di B e gli insiemi possono eventualmente coincidere
+#### relazione 
 #### operazione
 #### funzione
 
