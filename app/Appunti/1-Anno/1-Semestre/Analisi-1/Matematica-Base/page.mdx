@@ -1,4 +1,4 @@
-# Matematica Di Base
+# Matematica di Base
 ## Fondamenti di Logica
 La logica è quella disciplina che si occupa di analizzare e strutturare **proposizioni**, che possono assumere due valori di verità: Vero o Falso.
 
@@ -65,15 +65,20 @@ $$
 $$
 ## Insiemi numerici
 
-### operazioni tra insiemi
+### Operazioni tra insiemi
 Similmente alle proposizioni logiche è possibile fare operazioni tra insiemi, esse vengono chiamate:
-- Intersezione, che si indica con $\cap$ e può essere definita così: $ A \cap B$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B)$
-- Unione, che si indica con $\cup$ e può essere definita così: $A \cup B \Leftrightarrow( x \in A) \lor (x \in B)$ 
-- Differenza, che si indica con $\setminus$ e può essere definita così: $ A \setminus B \Leftrightarrow (x \in A) \land \lnot(x \in B)$
+- Intersezione, che si indica con $\cap$ e può essere definita così: $\forall x ( x \in (A \cap B)$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B))$
+- Unione, che si indica con $\cup$ e può essere definita così: $\forall x (x \in (A \cup B) \Leftrightarrow( x \in A) \lor (x \in B))$ 
+- Differenza, che si indica con $\setminus$ e può essere definita così: $ \forall x ( x \in (A \setminus B) \Leftrightarrow (x \in A) \land \lnot(x \in B))$
 
 Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
 - $A \subset B$ significa che A è un sottoinsieme di B, ovvero: $(\forall x \in A, x \in B)$ <Tooltip text="Questa parte serve ad escludere il caso in cui anche tutti gli elementi di B appartengono ad A ">$\land \lnot(\forall x \in B, x \in B) $ </Tooltip>
 - $A \subseteq B$ significa che A è sottoinsieme di B e gli insiemi possono eventualmente coincidere
+
+Gli insiemi possono essere definiti in due modi:
+- Elencandone ogni elemento $A = \{a_1, a_2, a_3...a_n\}$
+- Definendo una regola di appartenenza $A = \{x \in B : P(x)\}$
+Esiste un particolare tipo di insieme chiamato insieme vuoto (che non contiene elementi) e si indica così: $\emptyset$
 #### relazione 
 #### operazione
 #### funzione
