@@ -1,0 +1,167 @@
+# Matematica di Base
+## Fondamenti di Logica
+La logica è quella disciplina che si occupa di analizzare e strutturare **proposizioni**, che possono assumere due valori di verità: Vero o Falso.
+
+
+
+- $P$ è una proposizione, ovvero una caratteristica o un evento, che può essere vero o falso.
+
+Un esempio può essere: "il sole splende"
+
+- $\lnot P$ è la sua negazione
+
+Se consideriamo $P$ uguale a "il sole splende", la sua negazione $\lnot P$ significa indicativamente: "il sole non splende"
+
+E' possibile creare una proposizione logica unendo dei predicati con degli **operatori** logici ed attribuirne un valore di verità complessivo in base ai valori dei predicati
+
+$P$ e $Q$ sono due predicati, di seguito fornitò una serie di esempi esplicativi:
+
+- $P \land Q$ Operatore **AND**, questa proposizione è vera solo se lo sono entrambi i predicati
+- $P \lor Q$ Operatore **OR**, questa proposizione è vera se almeno uno dei 2 predicati è vero
+- $P \Rightarrow Q$ Operatore di **implicazione**, questa proposizione è falsa solo se $P$ è vera e $Q$ è falsa
+- $P \Leftrightarrow Q$ Operatore di **doppi implicazione**, questa proposizione è vera se $P$ e $Q$ sono entrambe vere o false
+
+E' possibile tenere traccia degli stati di verità tramite una semblice *tabella di verità*:
+| P | Q | P ∧ Q  | P ∨ Q  | P → Q  | P ⇔ Q 
+|:---:|:---:|:-----------:|:----------:|:--------------------:|:-:|
+|  V  |  V  |      V      |     V      |          V           | V |
+|  V  |  F  |      F      |     V      |          F           | F |
+|  F  |  V  |      F      |     V      |          V           | F |
+|  F  |  F  |      F      |     F      |          V           | V |
+
+
+<Callout type="nota">Da notare che l'impicazione può essere scritta come unione di più **AND**, **OR** e **NOT**, riesci a trovare una formula che gli equivale? <Spoiler>$\lnot(P \land \lnot Q)$</Spoiler> </Callout>
+
+### Logica del primo ordine ed insiemi
+
+Esistono altri strumenti logici che rendono il gioco ancora più interessante, introduciamo:
+
+#### Quantificatori
+I quantificatori sono universale o esistenziali:
+- $\forall$ e $\lnot \exist$ che significano rispettivamente: **per ogni** e **non esiste**
+- $\exist$ e $\lnot \forall$ rispetivamente: **esiste un** e **non per ogni**
+#### Variabili ed insiemi
+Un insieme è una collezione di oggetti che condividono alcune caratteristiche o che sono raggruppati secondo una regola particolare  
+Mentre una variabile simboleggia un elemento "qualunque" dell'insieme
+
+il simbolo $\in$ sta ad indicare che un certo elemento **appartiene** ad un insieme
+
+Scelto un dominio dove le proposizioni logiche posso operare è possibile quantificare gli oggetti all'interno di una formula
+
+Ad esempio posso affermare che **tutti** gli uomini sono mortali in questo modo:
+$$
+\forall x \in U, M(x)
+$$
+
+Dove $U$ è l'insieme degli uomini e $M$ è un predicato che significa "è mortale".  
+Il classico sillogismo aristotelico:
+- Tutti gli uomini sono mortali
+- Socrate è un uomo
+- Socrate è mortale
+
+Può essere formalizzato in questo modo
+$$
+(\forall x \in U, M(x)) \land (Socrate \in U) \Rightarrow M(Socrate)
+$$
+## Insiemi numerici
+
+### Operazioni tra insiemi
+Similmente alle proposizioni logiche è possibile fare operazioni tra insiemi, esse vengono chiamate:
+- Intersezione, si indica con $\cap$ e può essere definita così: $\forall x ( x \in (A \cap B)$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B))$
+- Unione, si indica con $\cup$ e può essere definita così: $\forall x (x \in (A \cup B) \Leftrightarrow( x \in A) \lor (x \in B))$ 
+- Differenza, si indica con $\setminus$ e può essere definita così: $ \forall x ( x \in (A \setminus B) \Leftrightarrow (x \in A) \land \lnot(x \in B))$
+- Prodotto cartessiano, si indica con \times e può essere definito così: $A \times B := {(a,b) : a \in A, b \in B }$ 
+- Complementare, si indica con $A^c$, e può essere definita così: $\forall x (x \in A^c \Leftrightarrow (x \in $<Tooltip text="Insieme Universo relativo, ovvero l'inseme che contiene tutti gli elementi di un contesto">U</Tooltip>$)\land(x \lnot \in A))$
+
+Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
+- $A \subset B$ significa che A è un sottoinsieme di B, ovvero: $(\forall x \in A, x \in B)$ <Tooltip text="Questa parte serve ad escludere il caso in cui anche tutti gli elementi di B appartengono ad A ">$\land \lnot(\forall x \in B, x \in B) $ </Tooltip>
+- $A \subseteq B$ significa che A è sottoinsieme di B e gli insiemi possono eventualmente coincidere
+
+Gli insiemi possono essere definiti in due modi:
+- Elencandone ogni elemento $A = \{a_1, a_2, a_3...a_n\}$
+- Definendo una regola di appartenenza $A = \{x \in B $<Tooltip text="'tale che'">:</Tooltip>$ P(x)\}$
+
+Esiste un particolare tipo di insieme chiamato insieme vuoto (che non contiene elementi) e si indica così: $\emptyset$  
+### Numeri Naturali - $\N$
+
+I numeri naurali sono tutti i numeri interi positivi, compreso lo 0: 
+$$
+\N=\{0,1,2,3...,\infty\}
+$$
+I numeri naturali sono compatibili con l'operatore della somma e del prodotto
+#### Proprietà della somma
+- **Chiusura:** $\forall a,b \in \N, (a+b) \in N $ - Sommando due numeri in $\N$ si rimane in $\N$
+- **Associatività:** $\forall a,b,c \in \N, (a+b)+c = a+(b+c) $ - Non conta il posizionamento delle parentesi
+- **Elemento neutro:** $\exist 0 \in \N : \forall a \in \N, a+0 = a $ - Sommando un qualunque numero a 0 si ottiene lo stesso numero
+- **Commutatività:** $\forall a,b \in \N, (a+b) = (b+a) $ - L'ordine degli addendi non influisce sul risultato
+- **Cancellatività:** $\forall a,b,c \in \N, a+c = b+c \Rightarrow a=b$ - Si spiega da sola
+#### Proprietà del prodotto
+- **Chiusura:** $\forall a,b \in \N, a\cdot b \in \N$ 
+- **Associatività:** $\forall a,b,c \in \N, (a \cdot b)\cdot c = a\cdot (b\cdot c) $ - Non conta il posizionamento delle parentesi
+- **Elemento neutro:** $\exist 1 \in \N : \forall a \in \N, a\cdot 1 = a $ - Moltiplicando un qualunque numero a 1 si ottiene lo stesso numero
+- **Elemento Assorbente:** $\exist 0 \in \N : \forall a \in \N, a \cdot 0 = 0$ - Moltiplicando un qualunque numero a 0 si ottiene 0
+- **Commutatività:** $\forall a,b \in \N, (a\cdot b) = (b\cdot a) $ - L'ordine dei fattori non influisce sul risultato
+- **Cancellatività:** $\forall a,b,c \in \N, a \cdot c = b \cdot c \Rightarrow a=b$ - Si spiega da sola
+
+### Numeri Relativi - $\Z$
+Per introdurre il concetto di sottrazione, introduciamo l'insieme dei numeri interi
+$$
+\Z = \{0,1,-1,2,-2,3,-3...\}
+$$
+Le proprietà dei numeri **Naturali** si estendono anche nei numeri **Interi**, con l'aggiunta dell'**Opposto** 
+$$
+\forall a \in \Q \exist opposto : a - opposto = 0
+$$
+Quindi preso un numero positivo **$a$**, esiste sempre un corrispettivo negativo **$-a$**
+
+
+### Numeri Interi - $\Q$
+
+Oltre al concetto di **opposto** esiste anche il concetto di **Inverso**: si indica con $a^{-1}$ e corrisponde a $\frac{1}{a}$
+
+Per dare senso a questa espressione bisogna introdurre l'insieme dei numeri razionali $\Q$
+$$
+\Q = \{\frac{p}{q} : p \in \Z , q \in z, \neq 0\}
+$$
+oppure:
+$$
+\Q = \{\frac{p}{q} : p \in \Z, q \in \N^{+}\}
+$$
+Vale la seguente proprietà:
+$\frac{p}{q} = \frac{n}{m} \Leftrightarrow pm = qn$
+
+$\Q$ è il primo insieme che può rientrare nella definizione di **Campo**
+
+### Numeri Reali - $\R$
+
+## Relazione 
+La relazione è definita come **sottoinsieme** di un prodotto cartesiano tra due insiemi, che rispecchia una certo criterio di connessione
+
+#### Proprietà che interessano le relazioni
+- **Riflessiva:** vale se $\forall a \in A, aRa$
+- **Antiriflessiva:** vale se $\forall a \in A, (a,a) \Rightarrow a \notin R$
+- **Simmetrica:** se $\forall a,b \in A, aRb \Rightarrow bRa$
+- **Antisimmetrica:** se $\forall a,b \in A, (aRb \land bRa) \Rightarrow a = b$
+- **Asimmetrica:** se $\forall a,b \in A, aRb \Rightarrow (b,a) \notin R$
+- **Transitiva:** se $(aRb \land bRc) \Rightarrow aRc$ 
+
+
+#### Le relazioni più comuni sono:
+
+- relazioni d'**Uguaglianza:** ovvero il simbolo '$=$'
+    - Riflessiva
+    - Simmetrica
+    - Transitiva
+- relazioni d'**Ordine largo:** $\leq$ e $\geq$
+    - Riflessiva
+    - Antisimmetrica
+    - Transitiva
+- relazioni d'**Ordine stretto:** ovvero i simboli '$<$' e '$>$'
+    - Antiriflessiva
+    - Asimmetrica
+<Wip />
+## Operazione
+## Funzione
+
+
+

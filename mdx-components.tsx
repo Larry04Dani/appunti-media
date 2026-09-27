@@ -13,6 +13,7 @@ import { Riferimento } from '@/components/riferimento'
 import { P5Sketch } from '@/components/p5-sketch'
 import { Tooltip } from '@/components/tooltip'
 import { Wip } from '@/components/wip'
+import { FolderTree, StrutturaCartelle } from '@/components/folder-tree'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -92,5 +93,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // WIP — barra orizzontale con pattern a strisce gialle e nere (lavori in corso)
     // Uso: <Wip /> oppure <Wip text="Lavori in corso" />
     Wip,
+
+    // FOLDERTREE (o STRUTTURACARTELLE) — per mostrare alberi di cartelle e file formattati
+    // Uso: <FolderTree title="Struttura corso">
+    //        - **Teoria**
+    //          - Argomento 1
+    //      </FolderTree>
+    FolderTree,
+    StrutturaCartelle,
   }
 }

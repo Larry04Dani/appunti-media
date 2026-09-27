@@ -148,6 +148,32 @@ body {
   content: none;
 }
 
+/* ─── SPAZIATURA ELENCHI PUNTATI E NUMERATI ────────────────────────────────
+   Di default Tailwind Typography applica molto margine verticale (0.5em)
+   tra gli elementi di una lista (li) e fino a 1.25em per i paragrafi interni.
+   Riduciamo lo spazio per rendere gli elenchi degli appunti più compatti.
+*/
+.prose ul > li,
+.prose ol > li {
+  margin-top: 0.15em;
+  margin-bottom: 0.15em;
+}
+
+.prose ul > li > p,
+.prose ol > li > p {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+
 /* ─── STILE PERSONALIZZATO DEI LINK ─────────────────────────────────────────
    Sovrascriviamo il comportamento di default di Tailwind Typography per i tag <a>
    dentro le aree .prose (dove vive il testo dei tuoi appunti).

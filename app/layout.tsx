@@ -39,6 +39,7 @@ import { buildTree } from "@/lib/get-notes-tree";
 import path from "path";
 import { Sidebar } from "@/components/sidebar";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { NotesTreeProvider } from "@/components/notes-tree-provider";
 
 // Ora la funzione è "async" (asincrona) perché deve leggere il disco (filesystem)
 export default async function RootLayout({
@@ -77,38 +78,40 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Navbar a larghezza intera e sticky */}
-          <Navbar />
+          <NotesTreeProvider tree={tree}>
+            {/* Navbar a larghezza intera e sticky */}
+            <Navbar />
 
-          {/* Contenitore principale centrato, largo al massimo 1280px (max-w-7xl) */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8">
-            
-            {/* Flex container per affiancare Sidebar (a sinistra) e Contenuto (a destra) */}
-            <div className="flex pb-16">
+            {/* Contenitore principale centrato, largo al massimo 1280px (max-w-7xl) */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8">
               
-              {/* Passiamo l'albero letto dal server al componente Sidebar (che è Client) */}
-              <Sidebar tree={tree} />
-              
-              {/* Il tag <main> accoglie il file .mdx. 
-                  'flex-1' gli fa occupare tutto lo spazio rimanente accanto alla sidebar.
-                  'min-w-0' evita bug di overflow quando inserisci frammenti di codice molto lunghi. */}
-              <main className="flex-1 min-w-0 pl-6 prose dark:prose-invert max-w-none
-                prose-headings:text-primary dark:prose-headings:text-primary
-                prose-h1:text-4xl prose-h1:font-extrabold 
-                prose-h2:text-3xl prose-h2:text-secondary prose-h2:font-bold dark:prose-h2:text-secondary
-                prose-code:rounded prose-code:px-1
-              ">
-                {/* 
-                  Breadcrumbs: la "traccia" che mostra dove si trova l'utente nell'albero del sito.
-                  Es: Home › Appunti › 1Anno › Analisi
-                  Si nasconde automaticamente nella homepage (restituisce null se pathname === "/").
-                */}
-                <Breadcrumbs />
-                {children}
-              </main>
+              {/* Flex container per affiancare Sidebar (a sinistra) e Contenuto (a destra) */}
+              <div className="flex pb-16">
+                
+                {/* Passiamo l'albero letto dal server al componente Sidebar (che è Client) */}
+                <Sidebar tree={tree} />
+                
+                {/* Il tag <main> accoglie il file .mdx. 
+                    'flex-1' gli fa occupare tutto lo spazio rimanente accanto alla sidebar.
+                    'min-w-0' evita bug di overflow quando inserisci frammenti di codice molto lunghi. */}
+                <main className="flex-1 min-w-0 pl-6 prose dark:prose-invert max-w-none
+                  prose-headings:text-primary dark:prose-headings:text-primary
+                  prose-h1:text-4xl prose-h1:font-extrabold 
+                  prose-h2:text-3xl prose-h2:text-secondary prose-h2:font-bold dark:prose-h2:text-secondary
+                  prose-code:rounded prose-code:px-1
+                ">
+                  {/* 
+                    Breadcrumbs: la "traccia" che mostra dove si trova l'utente nell'albero del sito.
+                    Es: Home › Appunti › 1Anno › Analisi
+                    Si nasconde automaticamente nella homepage (restituisce null se pathname === "/").
+                  */}
+                  <Breadcrumbs />
+                  {children}
+                </main>
 
+              </div>
             </div>
-          </div>
+          </NotesTreeProvider>
         </ThemeProvider>
       </body>
     </html>
