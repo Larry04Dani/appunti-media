@@ -29,10 +29,15 @@ type RiferimentoProps = {
 //
 //   <Riferimento href="https://it.wikipedia.org/wiki/Teorema_di_Pitagora" title="Wikipedia — Teorema di Pitagora" />
 export function Riferimento({ href, title, children }: RiferimentoProps) {
-  // Determiniamo se il link è esterno (inizia con http) o interno al sito.
-  // I link interni usano il componente <Link> di Next.js (navigazione senza ricarica pagina).
-  // I link esterni usano un normale <a> con target="_blank" (apre nuova scheda).
-  const isExternal = href.startsWith("http");
+  // Determiniamo se il link è esterno (inizia con http o www, o contiene un dominio con punto e non inizia per / o #).
+  const isExternal =
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("www.") ||
+    (!href.startsWith("/") && !href.startsWith("#") && href.includes("."));
+
+  // Se l'URL inizia con "www.", aggiungiamo il protocollo "https://" per non farlo interpretare come rotta interna
+  const externalHref = href.startsWith("www.") ? `https://${href}` : href;
 
   // Il contenuto cliccabile del titolo (uguale per entrambi i casi)
   const titleContent = (
@@ -59,7 +64,7 @@ export function Riferimento({ href, title, children }: RiferimentoProps) {
       {/* Rendiamo il titolo come link, scegliendo il componente giusto */}
       {isExternal ? (
         // Link esterno: apre in una nuova scheda
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a href={externalHref} target="_blank" rel="noopener noreferrer">
           {titleContent}
         </a>
       ) : (

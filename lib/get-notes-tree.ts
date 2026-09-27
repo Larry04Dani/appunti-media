@@ -62,3 +62,34 @@ export function buildTree(dirPath: string, basePath: string): TreeNode[] {
 
   return nodes;
 }
+
+/**
+ * Scansiona la cartella app per individuare tutte le rotte che contengono
+ * un file page.mdx o page.tsx effettivo. Serve a Breadcrumbs per non creare link 404
+ * su cartelle puramente organizzative (es. "/Appunti" o "Teoria/").
+ */
+export function getAllPageRoutes(dirPath: string, basePath = ""): string[] {
+  if (!fs.existsSync(dirPath)) return [];
+  const routes: string[] = [];
+  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  for (const entry of entries) {
+    if (
+      entry.name.startsWith(".") ||
+      entry.name === "node_modules" ||
+      entry.name.startsWith("(")
+    ) {
+      continue;
+    }
+    const fullPath = path.join(dirPath, entry.name);
+    if (entry.isDirectory()) {
+      const subRoutes = getAllPageRoutes(fullPath, `${basePath}/${entry.name}`);
+      routes.push(...subRoutes);
+    } else if (/^page\.(mdx|tsx|jsx|js)$/.test(entry.name)) {
+      routes.push(basePath || "/");
+    }
+  }
+
+  return routes;
+}
+

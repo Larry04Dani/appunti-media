@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 // Qualsiasi cosa metti qui dentro (es. una navbar) apparirà in ogni singola pagina.
 // `children` rappresenta il contenuto specifico della pagina in cui ti trovi (es. page.mdx).
 // Importiamo la funzione che abbiamo creato per esplorare le cartelle
-import { buildTree } from "@/lib/get-notes-tree";
+import { buildTree, getAllPageRoutes } from "@/lib/get-notes-tree";
 import path from "path";
 import { Sidebar } from "@/components/sidebar";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -48,11 +48,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   
-  // Calcoliamo il percorso assoluto della cartella "/app/Appunti" sul disco
-  const appuntiPath = path.join(process.cwd(), "app/Appunti");
+  // Calcoliamo il percorso assoluto delle cartelle
+  const appPath = path.join(process.cwd(), "app");
+  const appuntiPath = path.join(appPath, "Appunti");
   
   // Leggiamo tutto l'albero di cartelle e file. L'URL di base sarà "/Appunti"
   const tree = buildTree(appuntiPath, "/Appunti");
+
+  // Raccogliamo tutte le rotte che hanno effettivamente un file page.mdx/tsx
+  const validRoutes = getAllPageRoutes(appPath);
 
   return (
     // suppressHydrationWarning è necessario per next-themes, evita errori quando il server
@@ -78,7 +82,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NotesTreeProvider tree={tree}>
+          <NotesTreeProvider tree={tree} validRoutes={validRoutes}>
             {/* Navbar a larghezza intera e sticky */}
             <Navbar />
 
