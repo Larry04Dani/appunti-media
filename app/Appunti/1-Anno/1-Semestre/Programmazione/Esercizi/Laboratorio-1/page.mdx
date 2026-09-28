@@ -1,0 +1,112 @@
+# Esercizi laboratorio lezione 1
+
+## Es 1
+
+Ricopiare/riscrivere e poi compilare i due semplici programmi proposti in aula (di scrittura su schermo e somma di due variabili).
+- Scrivere un programma che scrive sullo schermo "Benvenuti al corso di programmazione in C".
+- Scrivere un programma che assegna dei valori a due variabili intere e poi calcola e stampa la loro somma.
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a, b, somma;
+    a = 2;
+    b = 3;
+    somma = a+b;
+    printf("Benvenuti al corso di programmazione C\n");
+
+
+    printf("2 + 3 = %d\n",somma);
+
+    return 0;
+}
+
+```
+
+## Es 2
+
+Scrivere un programma che, utilizzando degli asterischi, disegna sullo schermo un rettangolo (pieno) di base 8 e altezza 6 e poi sotto un triangolo rettangolo (pieno) di altezza 6 e poi ancora un triangolo isoscele (pieno) di altezza 7.
+
+```c
+#include <stdio.h>
+int main(void)
+{
+    printf("********\n");
+    printf("********\n");
+    printf("********\n");
+    printf("********\n");
+    printf("********\n");
+    printf("********\n");
+    printf("\n");
+    
+    printf("*\n");
+    printf("**\n");
+    printf("***\n");
+    printf("****\n");
+    printf("*****\n");
+    printf("******\n");
+    printf("\n");
+
+    printf("       *       \n");
+    printf("      ***      \n");
+    printf("     *****     \n");
+    printf("   ********    \n");
+    printf("  **********   \n");
+    printf(" ************  \n");
+    printf("***************\n");
+}
+
+```
+
+## Es 3
+
+Scrivere un programma che richiede all'utente di inserire due numeri interi e poi calcola e stampa la loro somma, differenza, prodotto e risultato della divisione.
+```c
+#include <stdio.h>
+int main (void)
+{
+    int a,b, somma, differenza, prodotto;
+    float divisione;
+    printf("inserisci il valore di a: ");
+    scanf("%d",&a);
+    printf("inserisci il valore di b: ");
+    scanf("%d",&b);
+    somma = a+b;
+    differenza = a-b;
+    prodotto = a*b;
+    divisione = (float) a/b;
+    printf("la somma è: %d\n", somma); 
+    printf("la differenza è: %d\n", differenza); 
+    printf("il prodotto è: %d\n", prodotto); 
+    printf("la divisione è: %.2f\n", divisione); 
+}
+```
+
+## Es 4
+
+Scrivere un programma che legge da tastiera 5 numeri interi e scrive sullo schermo la loro somma. Il programma dovra' utilizzare solo due variabili .
+
+```c
+#include <stdio.h>
+int main(void)
+{
+    int a, b;
+    b=0;
+    scanf("%d",&a);
+    b += a;
+    scanf("%d",&a);
+    b +=a;
+    scanf("%d",&a);
+    b +=a;
+    scanf("%d",&a);
+    b +=a;
+    scanf("%d",&a);
+    b +=a;
+    printf("%d\n",b);
+}
+```
+
+
+

@@ -103,7 +103,7 @@ I numeri naturali sono compatibili con l'operatore della somma e del prodotto
 - **Commutatività:** $\forall a,b \in \N, (a\cdot b) = (b\cdot a) $ - L'ordine dei fattori non influisce sul risultato
 - **Cancellatività:** $\forall a,b,c \in \N, a \cdot c = b \cdot c \Rightarrow a=b$ - Si spiega da sola
 
-### Numeri Relativi - $\Z$
+### Numeri Interi - $\Z$
 Per introdurre il concetto di sottrazione, introduciamo l'insieme dei numeri interi
 $$
 \Z = \{0,1,-1,2,-2,3,-3...\}
@@ -115,7 +115,7 @@ $$
 Quindi preso un numero positivo **$a$**, esiste sempre un corrispettivo negativo **$-a$**
 
 
-### Numeri Interi - $\Q$
+### Numeri Razionali - $\Q$
 
 Oltre al concetto di **opposto** esiste anche il concetto di **Inverso**: si indica con $a^{-1}$ e corrisponde a $\frac{1}{a}$
 
@@ -131,8 +131,29 @@ Vale la seguente proprietà:
 $\frac{p}{q} = \frac{n}{m} \Leftrightarrow pm = qn$
 
 $\Q$ è il primo insieme che può rientrare nella definizione di **Campo**
+### Numeri Irrazionali - $\mathbb{I}$
+
+I numeri irrazionali nascono da un problema geometrico apparentemente semplice: Applicare il teorema di pitagora per conoscere la lunghezza dell'ipotenusa di un triangolo rettangolo con cateti lunghi 1.
+<Callout type="dimostrazione">
+Si vuole trovare una soluzione del tipo $2 = (\frac{p}{q})^2 : p,q$ sono coprimi 
+
+Affinchè $p$ e $q$ siano coprimi dobbiamo dimostrare almeno che non sono entrambi pari  
+riscriviamo l'equazione moltiplicando entrambi i termini per $q^2$ : 
+$2 \cdot q^2 = p^2$  
+Dato che la quantià a sinistra è sicuramente pari, $p^2$ deve essere pari, e noi sappiamo che i quadrati dei numeri dispari sono sempre dispari
+quindi $p$ non può che essere pari, ottimo! allora q deve essere dispari. 
+Possiamo scrivere $p$ come $2 \cdot m$ dove $m \in N^+$   (Essendo pari)  
+$2 \cdot q^2 = 4\cdot m^2$  
+Semplifichiamo:  
+$q^2 = 2\cdot m^2$  
+Attenzione! se la quantità a destra è pari allora anche $q^2$ deve esserlo, di conseguenza $q$ è pari
+</Callout>
+
+
+
 
 ### Numeri Reali - $\R$
+$\R$ é un campo ordinato ed è completo
 
 ## Relazione 
 La relazione è definita come **sottoinsieme** di un prodotto cartesiano tra due insiemi, che rispecchia una certo criterio di connessione

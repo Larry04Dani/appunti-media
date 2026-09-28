@@ -17,7 +17,8 @@ import type { TreeNode } from "@/lib/get-notes-tree";
 
 // ─── TIPI E STRUTTURE DATI ─────────────────────────────────────────────────────
 type TreeNodeData = {
-  content: React.ReactNode[];
+  key: string;
+  content: React.ReactNode;
   subItems: TreeNodeData[];
   isFolder: boolean;
   isEllipsis: boolean;
@@ -76,13 +77,18 @@ function findNodeByPath(
 }
 
 // Converte un TreeNode (struttura disco da buildTree) in TreeNodeData per il rendering
-function convertTreeNodeToData(node: TreeNode): TreeNodeData {
+function convertTreeNodeToData(node: TreeNode, index: number = 0): TreeNodeData {
   const hasSub = !!(node.children && node.children.length > 0);
-  const subItems = hasSub ? node.children!.map(convertTreeNodeToData) : [];
+  const subItems = hasSub
+    ? node.children!.map((child, i) => convertTreeNodeToData(child, i))
+    : [];
+
+  const nodeKey = node.url || `tree-node-${node.name}-${index}`;
 
   // Se ha un URL ed è una pagina, rendiamo il testo un link cliccabile
   const contentNode = node.url ? (
     <Link
+      key={nodeKey}
       href={node.url}
       onClick={(e) => e.stopPropagation()}
       className="text-foreground hover:text-primary transition-colors underline-offset-2 hover:underline"
@@ -90,11 +96,12 @@ function convertTreeNodeToData(node: TreeNode): TreeNodeData {
       {node.name}
     </Link>
   ) : (
-    <span className="text-foreground/90">{node.name}</span>
+    <span key={nodeKey} className="text-foreground/90">{node.name}</span>
   );
 
   return {
-    content: [contentNode],
+    key: nodeKey,
+    content: contentNode,
     subItems,
     isFolder: hasSub || !node.url,
     isEllipsis: false,
@@ -134,14 +141,15 @@ function unpackParagraphs(children: React.ReactNode[]): React.ReactNode[] {
 }
 
 // Estrae i nodi dell'albero a partire dal tag <ul> generato da MDX
-function parseTreeList(ulElement: React.ReactNode): TreeNodeData[] {
+function parseTreeList(ulElement: React.ReactNode, parentKey = "manual"): TreeNodeData[] {
   if (!React.isValidElement(ulElement)) return [];
   const ul = ulElement as React.ReactElement<{ children?: React.ReactNode }>;
   const liElements = React.Children.toArray(ul.props.children).filter(React.isValidElement);
 
-  return liElements.map((liNode) => {
+  return liElements.map((liNode, idx) => {
     const li = liNode as React.ReactElement<{ children?: React.ReactNode }>;
     const allChildren = unpackParagraphs(React.Children.toArray(li.props.children));
+    const itemKey = `${parentKey}-${idx}`;
 
     // Cerca un eventuale sotto-elenco <ul> annidato
     const nestedUl = allChildren.find(
@@ -150,10 +158,10 @@ function parseTreeList(ulElement: React.ReactNode): TreeNodeData[] {
         (c.type === "ul" || (c as React.ReactElement<{ originalType?: string }>).props?.originalType === "ul")
     );
 
-    const content = allChildren.filter((c) => c !== nestedUl);
-    const subItems = nestedUl ? parseTreeList(nestedUl) : [];
+    const rawContent = allChildren.filter((c) => c !== nestedUl);
+    const subItems = nestedUl ? parseTreeList(nestedUl, itemKey) : [];
 
-    const plainText = extractPlainText(content);
+    const plainText = extractPlainText(rawContent);
 
     // Controllo se è un segnaposto ellissi (es. "...", "…")
     const isEllipsis = plainText.startsWith("...") || plainText.startsWith("…");
@@ -165,10 +173,10 @@ function parseTreeList(ulElement: React.ReactNode): TreeNodeData[] {
 
     // Riconoscimento cartelle
     const isBoldOnly =
-      content.length === 1 &&
-      React.isValidElement(content[0]) &&
-      ((content[0] as React.ReactElement).type === "strong" ||
-        (content[0] as React.ReactElement<{ originalType?: string }>).props?.originalType === "strong");
+      rawContent.length === 1 &&
+      React.isValidElement(rawContent[0]) &&
+      ((rawContent[0] as React.ReactElement).type === "strong" ||
+        (rawContent[0] as React.ReactElement<{ originalType?: string }>).props?.originalType === "strong");
 
     const isFolder = !isEllipsis && (subItems.length > 0 || plainText.endsWith("/") || isBoldOnly);
 
@@ -176,8 +184,16 @@ function parseTreeList(ulElement: React.ReactNode): TreeNodeData[] {
     const isCode =
       /\.(cpp|c|h|hpp|py|js|ts|tsx|jsx|html|css|json|sh|rs|go|java|md|mdx)$/i.test(plainText);
 
+    // Mappiamo i figli di rawContent con una key esplicita per evitare avvisi di React
+    const keyedContent = React.Children.map(rawContent, (child, cIdx) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, { key: child.key ?? `${itemKey}-content-${cIdx}` })
+        : child
+    );
+
     return {
-      content,
+      key: itemKey,
+      content: keyedContent,
       subItems,
       isFolder,
       isEllipsis,
@@ -252,7 +268,7 @@ function TreeNodeItem({
 
           {/* Nome della cartella */}
           <span className="font-semibold text-foreground/90 group-hover:text-primary truncate">
-            {node.content}
+            {React.Children.map(node.content, (c) => c)}
           </span>
         </div>
 
@@ -261,7 +277,7 @@ function TreeNodeItem({
           <div className="border-l-2 border-gray-200 dark:border-gray-800 ml-3.5 pl-2.5 flex flex-col gap-0.5 mt-0.5">
             {node.subItems.map((sub, idx) => (
               <TreeNodeItem
-                key={idx}
+                key={sub.key || idx}
                 node={sub}
                 defaultExpanded={defaultExpanded}
               />
@@ -279,26 +295,14 @@ function TreeNodeItem({
     <div className="flex items-center gap-1.5 py-1 px-1.5 rounded-md text-sm text-foreground/85 hover:bg-gray-100/70 dark:hover:bg-gray-800/40 transition-colors">
       <div className="w-[18px] shrink-0" />
       <FileIcon size={15} className="text-foreground/50 shrink-0" />
-      <span className="truncate">{node.content}</span>
+      <span className="truncate">
+        {React.Children.map(node.content, (c) => c)}
+      </span>
     </div>
   );
 }
 
 // ─── COMPONENTE PRINCIPALE: FolderTree ─────────────────────────────────────────
-//
-// 1. MODALITÀ AUTOMATICA (mostra le sottocartelle della pagina corrente):
-//    <FolderTree />
-//    <FolderTree title="Argomenti del corso" />
-//    <FolderTree path="/Appunti/1-Anno/1-Semestre" />
-//
-// 2. MODALITÀ MANUALE (formatta una lista Markdown fornita):
-//    <FolderTree title="Struttura Appunti">
-//      - **Teoria**
-//        - Argomento 1
-//        - ...
-//      - **Esercizi**
-//      - **Formulario**
-//    </FolderTree>
 export function FolderTree({
   title,
   defaultExpanded = true,
@@ -326,7 +330,7 @@ export function FolderTree({
         (c.type === "ul" || (c as React.ReactElement<{ originalType?: string }>).props?.originalType === "ul")
     );
     introElements = directChildren.filter((c) => !ulElements.includes(c));
-    treeNodes = ulElements.flatMap((ul) => parseTreeList(ul));
+    treeNodes = ulElements.flatMap((ul, ulIdx) => parseTreeList(ul, `ul-${ulIdx}`));
 
     if (detectedTitle === undefined) {
       detectedTitle = "Struttura delle cartelle";
@@ -337,7 +341,9 @@ export function FolderTree({
     const matchedNode = findNodeByPath(fullTree, targetPath);
 
     if (matchedNode?.children && matchedNode.children.length > 0) {
-      treeNodes = matchedNode.children.map(convertTreeNodeToData);
+      treeNodes = matchedNode.children.map((child, idx) =>
+        convertTreeNodeToData(child, idx)
+      );
     }
 
     if (detectedTitle === undefined) {
@@ -364,7 +370,7 @@ export function FolderTree({
       {/* Testo introduttivo opzionale (nella modalità manuale) */}
       {introElements.length > 0 && (
         <div className="px-4 pt-3.5 pb-1 text-sm text-foreground/80 leading-relaxed">
-          {introElements}
+          {React.Children.map(introElements, (el) => el)}
         </div>
       )}
 
@@ -373,7 +379,7 @@ export function FolderTree({
         {treeNodes.length > 0 ? (
           treeNodes.map((node, index) => (
             <TreeNodeItem
-              key={index}
+              key={node.key || `root-${index}`}
               node={node}
               defaultExpanded={defaultExpanded}
             />
