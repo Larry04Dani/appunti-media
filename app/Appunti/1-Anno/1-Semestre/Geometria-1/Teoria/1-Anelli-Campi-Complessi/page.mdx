@@ -1,0 +1,106 @@
+# Anelli, Campi e Numeri Complessi
+
+## Teoria degli Anelli
+
+### Definizione formale di Anello
+Un **anello** è una struttura algebrica $(A, +, \cdot)$ costituita da un insieme $A$ provvisto di due operazioni binarie interne (chiamate convenzionalmente *somma* e *prodotto*) che soddisfano le seguenti proprietà:
+
+1. **$(A, +)$ è un gruppo commutativo (o abeliano)**:
+   - **Associatività della somma:** $\forall a, b, c \in A, (a + b) + c = a + (b + c)$.
+   - **Esistenza dell'elemento neutro (zero):** $\exists 0 \in A : \forall a \in A, a + 0 = 0 + a = a$.
+   - **Esistenza dell'inverso additivo (opposto):** $\forall a \in A, \exists -a \in A : a + (-a) = (-a) + a = 0$.
+   - **Commutatività della somma:** $\forall a, b \in A, a + b = b + a$.
+
+2. **Proprietà del prodotto $(\cdot)$**:
+   - **Associatività:** $\forall a, b, c \in A, (a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+   - **Esistenza dell'elemento neutro (unità):** $\exists 1 \in A$ (con $1 \neq 0$ per evitare l'anello banale) tale che $\forall a \in A, a \cdot 1 = 1 \cdot a = a$.
+
+3. **Proprietà distributive del prodotto rispetto alla somma**:
+   - **Distributività a sinistra:** $\forall a, b, c \in A, a \cdot (b + c) = a \cdot b + a \cdot c$.
+   - **Distributività a destra:** $\forall a, b, c \in A, (a + b) \cdot c = a \cdot c + b \cdot c$.
+
+<Callout type="nota">
+**Anello commutativo:** Un anello si dice *commutativo* se il prodotto è un'operazione commutativa, ovvero se $\forall a, b \in A, a \cdot b = b \cdot a$.
+</Callout>
+
+### Lemmi di unicità e dimostrazioni
+
+**Lemma 1 (Unicità degli elementi neutri):** L'elemento neutro additivo ($0$) e l'elemento neutro moltiplicativo ($1$) sono unici.
+<Callout type="dimostrazione">
+**Dimostrazione per lo 0:**
+Supponiamo per assurdo che esistano due elementi neutri additivi $0_1$ e $0_2$.
+Poiché $0_1$ è neutro, si ha $0_1 + 0_2 = 0_2$.
+Poiché $0_2$ è neutro, si ha $0_1 + 0_2 = 0_1$.
+Confrontando le due uguaglianze, otteniamo $0_1 = 0_2$.
+*(Dimostrazione analoga vale per l'1 usando l'operazione di prodotto)*
+</Callout>
+
+**Lemma 2 (Unicità dell'inverso additivo):** Per ogni elemento $a \in A$, il suo opposto $-a$ è unico.
+<Callout type="dimostrazione">
+Sia $a \in A$. Supponiamo che esistano due inversi additivi, $b$ e $c$, tali che:
+$a + b = 0$ e $a + c = 0$.
+Partiamo da $b$ e sfruttiamo le proprietà di gruppo:
+$$b = b + 0 = b + (a + c) = (b + a) + c = 0 + c = c$$
+Dunque si ottiene $b = c$.
+</Callout>
+
+### Esempi fondamentali
+
+1. **L'anello degli interi $(\Z, +, \cdot, 0, 1)$:**
+   È il prototipo di anello commutativo. I numeri interi con la somma e il prodotto usuali rispettano tutti gli assiomi definiti.
+2. **L'anello dei polinomi a coefficienti interi $\Z[X]$:**
+   È l'insieme di tutti i polinomi in una variabile $X$ con coefficienti appartenenti a $\Z$.
+3. **L'anello quoziente $\Z/n\Z$ (Classi di resto modulo $n$):**
+   Fissato un intero $n > 0$, gli elementi di questo anello sono le classi di equivalenza $[a]$ di interi, dove $a \equiv b \pmod n$ se $a - b$ è multiplo di $n$.
+   La somma e il prodotto sono ben definiti e non dipendono dal rappresentante scelto.
+
+---
+
+## Campi ed Estensioni Numeriche
+
+### Definizione di Campo
+Un **campo** è un anello commutativo $(A, +, \cdot, 0, 1)$ non banale ($1 \neq 0$) in cui **ogni elemento non nullo ammette un inverso moltiplicativo**.
+$$
+\forall a \in A \setminus \{0\}, \exists a^{-1} \in A : a \cdot a^{-1} = 1
+$$
+
+### Invertibilità in $\Z/n\Z$
+**Teorema:** La classe $[m]$ è invertibile in $\Z/n\Z \Leftrightarrow \gcd(m, n) = 1$.
+<Callout type="dimostrazione">
+Per l'Identità di Bézout, $\gcd(m, n) = 1 \Leftrightarrow \exists u, v \in \Z$ tali che $um + vn = 1$.
+Passando alle classi di equivalenza modulo $n$, il termine $vn$ diventa congruo a $0$, lasciando:
+$[u] \cdot [m] = [1]$.
+Ne consegue che $[u]$ è esattamente l'inverso moltiplicativo di $[m]$.
+</Callout>
+
+### Catena degli Insiemi Numerici
+La costruzione dell'insiemistica numerica è una sequenza di estensioni motivate dalla necessità di risolvere equazioni sempre più complesse:
+$$ \N \subset \Z \subset \Q \subset \R \subset \mathbb{C} $$
+
+- **Da $\N$ a $\Z$:** In $\N$ non esiste l'inverso additivo ($x + 1 = 0$ non risolvibile).
+- **Da $\Z$ a $\Q$:** In $\Z$ mancano gli inversi moltiplicativi ($5x = 2$ non risolvibile). 
+- **Da $\Q$ a $\R$:** $\Q$ non è completo ($x^2 - 2 = 0$ non ha soluzioni in $\Q$). $\R$ "riempie" questi spazi.
+- **Da $\R$ a $\mathbb{C}$:** Le equazioni in cui compare la radice di un numero negativo ($x^2 + 1 = 0$) portano all'introduzione del campo complesso $\mathbb{C}$.
+
+---
+
+## Il Campo dei Numeri Complessi ($\mathbb{C}$)
+
+### Costruzione algebrica
+Il campo $\mathbb{C}$ si definisce come $\R^2$ arricchito dall'introduzione dell'**unità immaginaria** $i$, un elemento definito tramite la proprietà:
+$$ i^2 = -1 $$
+Ogni numero complesso è tipicamente espresso nella sua *forma algebrica*: $z = a + ib$ con $a, b \in \R$.
+
+### Operazioni aritmetiche
+Dati $z_1 = a + ib$ e $z_2 = c + id$:
+- **Somma:** $(a + ib) + (c + id) = (a + c) + i(b + d)$
+- **Prodotto:** $(a + ib) \cdot (c + id) = (ac - bd) + i(ad + bc)$
+
+### Proprietà ed elementi caratteristici
+Dato $z = a + ib$:
+- **Parte Reale e Immaginaria:** $\text{Re}(z) = a$, e $\text{Im}(z) = b$ (che è un numero reale).
+- **Complesso Coniugato:** $\bar{z} = a - ib$. Molto utile nel calcolo, dato che il prodotto $z \cdot \bar{z} = a^2 + b^2$ restituisce uno scalare reale non negativo.
+- **Modulo:** $|z| = \sqrt{a^2 + b^2} = \sqrt{z \cdot \bar{z}}$
+- **Inverso additivo:** $-z = -a - ib$
+- **Inverso moltiplicativo:** Per calcolare l'inverso moltiplicativo di $z$ (con $z \neq 0$), si moltiplicano numeratore e denominatore per $\bar{z}$:
+  $$ z^{-1} = \frac{1}{z} = \frac{\bar{z}}{z \cdot \bar{z}} = \frac{a - ib}{a^2 + b^2} = \frac{\bar{z}}{|z|^2} $$

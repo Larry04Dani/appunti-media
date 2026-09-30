@@ -1,0 +1,187 @@
+# Esercizi laboratorio lezione 2
+
+## Es 1
+
+Scrivere un programma che richiede all'utente un numero intero x e poi scrive sullo schermo una linea composta da x asterischi seguiti da x pallini. Esempio: se l'utente inserisce 4, allora il programma dovrà stampare ****oooo
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a;
+    int contatore = 0;
+    printf("Inserisci un numero\n");
+    scanf("%d",&a);
+    while(contatore < a)
+    {
+        printf("*");
+        contatore++;
+    }
+    while(contatore > 0)
+    {
+        printf("o");
+        contatore--;
+    }
+    printf("\n");
+}
+```
+</Spoiler>
+## Es 2
+
+Scrivere un programma che legge da tastiera 7 numeri interi e scrive sullo schermo la loro somma.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a, somma = 0, contatore = 0;
+    while (contatore < 7)
+    {
+        printf("inserisci l'elemento numero: %d\n",contatore+1);
+        scanf("%d",&a);
+        somma += a;
+        contatore++;
+    }
+    printf("la somma dei numeri inseriti è: %d",somma);
+}
+```
+</Spoiler>
+## Es 3
+
+Scrivere un programma che legge da tastiera 7 numeri interi e scrive sullo schermo qual'è il più piccolo tra i numeri inseriti.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a, minimo, contatore = 1;
+    printf("Inserisci l'elemento numero: 1\n");
+    scanf("%d",&a);
+    minimo = a;
+    while(contatore < 7)
+    {
+        printf("Inserisci l'elemento numero: %d\n", contatore+1);
+        scanf("%d",&a);
+        if (a < minimo)
+        {
+            minimo = a;
+        }
+        contatore++;
+    }
+    printf("Il minimo tra i numeri inseriti è: %d\n", minimo);
+}
+```
+</Spoiler>
+## Es 4
+
+Scrivere un programma che richiede l'inserimento di 7 numeri interi e alla fine scrive sullo schermo quanti numeri pari sono stati inseriti.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a, pari= 0, contatore = 0;
+    while (contatore < 7)
+    {
+        printf("Inserisci l'elemento numero: %d\n", contatore+1);
+        scanf("%d",&a);
+        if(a%2==0)
+        {
+            pari++;
+        }
+        contatore++;
+    }
+    printf("I numeri pari sono: %d su sette\n", pari);
+}
+```
+</Spoiler>
+## Es 5
+
+Scrivere un programma che richiede all'utente di inserire 7 numeri interi compresi tra 1 e 100 (estremi inclusi), ne calcola la somma e la scrive sullo schermo.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a,somma =0, contatore =0;
+    while(contatore <7)
+    {
+        printf("Inserisci un numero da 1 a 100\n");
+        scanf("%d",&a);
+        while (a < 1 || a > 100)
+        {
+            printf("Il numero che hai inserito non è nel range desiderato\n");
+            scanf("%d",&a);
+        }
+        somma += a;
+        contatore++;
+    }
+    printf("La somma corrisponde a: %d",somma);
+}
+```
+</Spoiler>
+## Es 6
+
+Scrivere un programma che richiede l'inserimento di una serie di numeri interi positivi; l'inserimento termina quando l'utente inserisce 0 o un valore negativo. Al termine dell'inserimento, sullo schermo viene scritta la somma e la media dei numeri inseriti. Attenzione: organizzare il ciclo in modo che il numero `<= 0` non venga sommato al totale e al contatore.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a = 1, somma = 0, contatore = 0;
+    while(a > 0)
+    {
+        printf("Inserisci l'elemento numero: %d\n", contatore+1);
+        scanf("%d",&a);
+        if (a > 0)
+        {
+            somma += a;
+            contatore++;
+        }
+    }
+    if (contatore > 0)
+    {
+        printf("La somma dei numeri inseriti è: %d\n", somma);
+        printf("La media dei numeri inseriti è: %.2f\n", (float)somma/contatore);
+    }
+    else
+    {
+        printf("Nessun numero positivo inserito.\n");
+    }
+}
+```
+</Spoiler>
+## Es 7
+
+Scrivere un programma che chiede all'utente di inserire da tastiera un numero intero di 5 cifre e lo riscrive "in verticale" cioe' mettendo un accapo dopo ogni cifra. (Sugg. usare l'operatore % che calcola il resto della divisione intera. NON servono istruzioni if o while)
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a;
+    printf("Inserisci un numero a 5 cifre\n");
+    scanf("%d",&a);
+
+    // Stampa ogni cifra dall'ordine più significativo al meno significativo
+    printf("%d\n", (a / 10000) % 10);
+    printf("%d\n", (a / 1000) % 10);
+    printf("%d\n", (a / 100) % 10);
+    printf("%d\n", (a / 10) % 10);
+    printf("%d\n", a % 10);
+}
+```
+</Spoiler>
+---
+
+<LezionePrecedente
+  href="/Appunti/1-Anno/1-Semestre/Programmazione/Esercizi/Laboratorio-1"
+  title="Laboratorio - 1 | Esercizi base"
+/>

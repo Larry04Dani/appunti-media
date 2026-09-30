@@ -137,8 +137,8 @@ I numeri irrazionali nascono da un problema geometrico apparentemente semplice: 
 <Callout type="dimostrazione">
 Si vuole trovare una soluzione del tipo $2 = (\frac{p}{q})^2 : p,q$ sono coprimi 
 
-Affinchè $p$ e $q$ siano coprimi dobbiamo dimostrare almeno che non sono entrambi pari  
-riscriviamo l'equazione moltiplicando entrambi i termini per $q^2$ : 
+Affinchè $p$ e $q$ siano coprimi è necessario non siano entrambi pari  
+riscriviamo l'equazione moltiplicando entrambi i termini per $q^2$ :  
 $2 \cdot q^2 = p^2$  
 Dato che la quantià a sinistra è sicuramente pari, $p^2$ deve essere pari, e noi sappiamo che i quadrati dei numeri dispari sono sempre dispari
 quindi $p$ non può che essere pari, ottimo! allora q deve essere dispari. 
@@ -148,6 +148,7 @@ Semplifichiamo:
 $q^2 = 2\cdot m^2$  
 Attenzione! se la quantità a destra è pari allora anche $q^2$ deve esserlo, di conseguenza $q$ è pari
 </Callout>
+Questo significa che non esiste una rappresentazione finita del numero che stiamo cercando, possiamo 
 
 
 
@@ -183,6 +184,38 @@ La relazione è definita come **sottoinsieme** di un prodotto cartesiano tra due
 <Wip />
 ## Operazione
 ## Funzione
+Una funzione è una relazione che, presi due insiemi $A$ e $B$ lega ogni elemento di $A$ a massimo un elemento di $B$
 
+$f : A \rightarrow B$  si legge "$f$ definita da A a B"  
+
+$x \mapsto f(x)$  si legge "$f$ associa f(x) a x"  
+
+#### Dominio
+$A$ viene definito il dominio della funzione, ovvero linsieme dei valori in input
+
+#### Codominio
+$B$ viene definito il codominio della funzione, ovvero l'insieme di arrivo
+
+#### Immagine
+L'immagine è l'insieme di tutti gli elementi mappati da $A$ a $B$ (non necessariamente tutti gli elementi del codominio ne fanno parte)
+
+#### Controimmagine/Preimmagine
+E' l'insieme degli elementi di $A$, dal quale derivano gli elementi di un certo sottoinsieme di $B$
+
+#### Suriettiva
+Se il **codominio** coincide con **l'immagine** allora la funzione si definisce **suriettiva**, piu precisamente:  
+$f$ è suriettiva $\Leftrightarrow \forall b \in B, \exist a : b = f(a)$
+
+#### Iniettiva
+Se ogni elemento del codominio ha una **singola** corrispondenza nel dominio la funzione si definisce **iniettiva**, più precisamente  
+$f$ è iniettiva $\Leftrightarrow \forall a_1, a_2 \in A, f(a_1) = f(a_2) \Rightarrow a_1 = a_2 $
+
+#### Biettiva
+Quando un funzione possiede entrambe le proprietà viene definita biettiva
+
+#### Composta
+
+#### Inversa
+L'inversa di una funzione è 
 
 

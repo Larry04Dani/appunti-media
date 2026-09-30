@@ -210,3 +210,67 @@ Gli appunti di questo corso sono strutturati così:
 - **Formulario**
 
 </FolderTree>
+
+---
+
+## 7. Navigazione tra le Lezioni (`ProssimaLezione`, `LezionePrecedente`, `NavigazioneLezioni`)
+
+Questi elementi permettono di passare alla lezione successiva (con testo e freccia a destra →) o a quella precedente (con freccia a sinistra ← e testo). Sono disponibili sia con nome inglese (`NextLesson`, `PrevLesson`, `LessonNav`) che italiano (`ProssimaLezione`, `LezionePrecedente`, `NavigazioneLezioni`).
+
+### Scheda Singola (Prossima Lezione)
+
+Ideale a fine pagina per invitare a proseguire con l'argomento successivo:
+
+<ProssimaLezione href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Tipi-di-dato" title="Tipi di dato" />
+
+Puoi anche personalizzare il testo dell'etichetta superiore con `text` o `label`:
+
+<ProssimaLezione
+  href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Tipi-di-dato"
+  title="Tipi di dato nel Linguaggio C"
+  text="Passa alla prossima lezione"
+/>
+
+### Scheda Singola (Lezione Precedente)
+
+Utile per consentire un rapido ritorno all'argomento introduttivo o di prerequisito:
+
+<LezionePrecedente href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Introduzione" title="Introduzione" />
+
+### Navigazione Completa (Precedente e Successiva affiancate)
+
+Con `<NavigazioneLezioni>` (o `<LessonNav>`), le schede vengono affiancate su due colonne su desktop e impilate ordinatamente su mobile:
+
+<NavigazioneLezioni
+  prev={{
+    href: "/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Introduzione",
+    title: "Introduzione",
+    label: "Lezione precedente"
+  }}
+  next={{
+    href: "/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Blocchi-Condizionali",
+    title: "Blocchi Condizionali",
+    label: "Prossima lezione"
+  }}
+/>
+
+### Variante a Bottone Compatto (`variant="button"`)
+
+Se preferisci pulsanti più discreti da posizionare inline o dopo un esercizio:
+
+<div className="flex flex-wrap gap-4 items-center my-4">
+  <LezionePrecedente
+    href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Introduzione"
+    title="Introduzione"
+    variant="button"
+  />
+  <ProssimaLezione
+    href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Blocchi-Condizionali"
+    title="Blocchi Condizionali"
+    variant="button"
+  />
+</div>
+
+### Modalità Automatica
+
+Se inserisci `<NavigazioneLezioni />` (o `<ProssimaLezione />` / `<LezionePrecedente />`) **senza specificare parametri**, il componente consulta automaticamente la sequenza delle dispense nell'albero dei corsi e calcola la pagina precedente e la pagina successiva in base all'URL in cui ci si trova!

@@ -14,6 +14,14 @@ import { P5Sketch } from '@/components/p5-sketch'
 import { Tooltip } from '@/components/tooltip'
 import { Wip } from '@/components/wip'
 import { FolderTree, StrutturaCartelle } from '@/components/folder-tree'
+import {
+  NextLesson,
+  ProssimaLezione,
+  PrevLesson,
+  LezionePrecedente,
+  LessonNav,
+  NavigazioneLezioni,
+} from '@/components/lesson-nav'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -101,5 +109,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     //      </FolderTree>
     FolderTree,
     StrutturaCartelle,
+
+    // NAVIGAZIONE TRA LEZIONI — per passare alla lezione successiva e/o precedente
+    // Uso singolo:     <ProssimaLezione href="/Appunti/..." title="Tipi di dato" />
+    //                  <LezionePrecedente href="/Appunti/..." title="Introduzione" />
+    // Uso combinato:   <NavigazioneLezioni prev={{ href: "...", title: "..." }} next={{ href: "...", title: "..." }} />
+    // Uso automatico:  <NavigazioneLezioni /> (legge automaticamente la sequenza delle dispense!)
+    NextLesson,
+    ProssimaLezione,
+    PrevLesson,
+    LezionePrecedente,
+    LessonNav,
+    NavigazioneLezioni,
   }
 }

@@ -47,6 +47,17 @@ Utilizzati per eseguire operazioni matematiche sui dati.
 | `/`           | Divisione       | Divide il numeratore per il denominatore (se interi, tronca i decimali) | `a / b` $\rightarrow$ `3`                    |
 | `%`           | Modulo          | Restituisce il resto della divisione intera                             | `a % b` $\rightarrow$ `1`                    |
 
+##### Operatori relazionali
+| **Operatore** | **Nome**         | **Descrizione**                                                 |
+| ------------- | ---------------- | --------------------------------------------------------------- |
+| `==`          | Uguale           | Restituisce `1` solo se i due valori a confronto sono uguali    |
+| `!=`          | Diverso          | Restituisce `1` solo se i due valori a confronto sono diversi   |
+| `<`           | Minore           | Restituisce `1` solo se il valore a sinistra è minore di quello a destra |
+| `<=`          | Minore o uguale  | Restituisce `1` solo se il valore a sinistra è minore o uguale a quello a destra |
+| `>`           | Maggiore         | Restituisce `1` solo se il valore a sinistra è maggiore di quello a destra |
+| `>=`          | Maggiore o uguale| Restituisce `1` solo se il valore a sinistra è maggiore o uguale a quello a destra |
+
+
 ##### Operatori logici
 Utilizzati per eseguire operazioni matematiche sui dati.
 
@@ -55,3 +66,21 @@ Utilizzati per eseguire operazioni matematiche sui dati.
 | `&&`          | AND logico | Restituisce `1` solo se **entrambe** le condizioni sono vere |
 | \|\|          | OR logico  | Restituisce `1` se **almeno una** condizione è vera          |
 | `!`           | NOT logico | Inverte il valore di verità (vero diventa falso e viceversa) |
+
+##### Regole di precedenza
+- operatori unari `++` `--` `!`
+- operatori aritmetici `*` `/` `%`
+- operatori binari `+`, `-`
+- operatori relazionali `<` `>` `<=` `>=`
+- operatori di eguaglianza `==` , `!=`
+- operatore booleano `&&`
+- operatore booleano `||`
+- operatore di assegnamento `=`
+
+---
+
+<NextLesson
+  href="/Appunti/1-Anno/1-Semestre/Programmazione/Linguaggio-C/Blocchi-Condizionali"
+  title="Blocchi condizionali"
+  text="Prossima lezione consigliata"
+/>
