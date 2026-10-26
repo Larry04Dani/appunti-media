@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { SettingsSheet } from "./settings-sheet";
+import { TodoSheet } from "./todo-sheet";
+import type { TodoItem } from "@/lib/todo-types";
 
-export function Navbar() {
+export function Navbar({ todos = [] }: { todos?: TodoItem[] }) {
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-gray-200 dark:border-gray-800 h-[var(--navbar-h)]">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full not-prose">
@@ -23,10 +25,14 @@ export function Navbar() {
             <Link href="/Templates" className="hover:text-primary transition-colors">
               Templates
             </Link>
+            <Link href="/Todo" className="hover:text-primary transition-colors">
+              Todo
+            </Link>
             {/* Aggiungi altri link qui */}
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <TodoSheet todos={todos} />
           <ThemeToggle />
           <SettingsSheet />
         </div>

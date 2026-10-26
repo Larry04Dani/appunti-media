@@ -1,0 +1,181 @@
+# Funzioni
+
+Una funzione è una relazione che, presi due insiemi $A$ e $B$, lega ogni elemento di $A$ a massimo un elemento di $B$.
+
+- $f : A \rightarrow B$ si legge "$f$ definita da A a B"  
+- $x \mapsto f(x)$ si legge "$f$ associa $f(x)$ a $x$"  
+
+### Concetti fondamentali
+
+#### Dominio
+$A$ viene definito il **dominio** della funzione, ovvero l'insieme dei valori in input.
+
+#### Codominio
+$B$ viene definito il **codominio** della funzione, ovvero l'insieme di arrivo.
+
+#### Immagine
+L'**immagine** è l'insieme di tutti gli elementi mappati da $A$ a $B$ (non necessariamente tutti gli elementi del codominio ne fanno parte):
+$$
+\text{Im}(f) = \{f(x) : x \in A\} \subseteq B
+$$
+
+#### Controimmagine / Preimmagine
+È l'insieme degli elementi di $A$ dai quali derivano gli elementi di un certo sottoinsieme di $B$.
+
+---
+
+### Proprietà delle funzioni
+
+#### Suriettiva
+Se il **codominio** coincide con **l'immagine** allora la funzione si definisce **suriettiva**, più precisamente:  
+$$
+f \text{ è suriettiva} \Leftrightarrow \forall b \in B, \exist a \in A : b = f(a)
+$$
+
+#### Iniettiva
+Se ogni elemento del codominio ha al più una singola corrispondenza nel dominio la funzione si definisce **iniettiva**, più precisamente:  
+$$
+f \text{ è iniettiva} \Leftrightarrow \forall a_1, a_2 \in A, f(a_1) = f(a_2) \Rightarrow a_1 = a_2
+$$
+
+#### Biettiva
+Quando una funzione possiede entrambe le proprietà viene definita **biettiva** (o biunivoca).  
+In questo caso esiste una corrispondenza biunivoca esatta tra i due insiemi.
+
+#### Composta
+È possibile combinare più funzioni per creare una **funzione composta**, indicata con:  
+$$
+(g \circ f)(x) = g(f(x))
+$$
+
+#### Identità
+La **funzione identità** è quella che ad ogni elemento dell'insieme $A$ fa corrispondere lo stesso esatto elemento e si indica con $\text{id}_A$:
+$$
+\text{id}_A(x) = x \quad \forall x \in A
+$$
+
+#### Inversa
+L'**inversa** di una funzione $f : A \rightarrow B$ è quella funzione $g : B \rightarrow A$ tale che $g \circ f = \text{id}_A$ e $f \circ g = \text{id}_B$. In poche parole è la funzione che neutralizza la prima.
+
+---
+
+### Proprietà delle funzioni inverse
+
+<Callout type="definizione" title="Lemma 1">
+
+Una funzione è invertibile $\Leftrightarrow$ La funzione è biettiva
+
+</Callout>
+<Callout type="dimostrazione">
+
+**Assumiamo $f : A \rightarrow B$ invertibile**  
+
+<br/>
+
+**"$\Rightarrow$" Se è invertibile allora è biettiva**  
+
+<Spoiler title="Dimostriamo che f è iniettiva">
+
+- Siano $a, a_1 : f(a) = f(a_1)$
+- Allora $g(f(a)) = g(f(a_1))$
+- Per definizione di inversa $g \circ f = \text{id}_A$
+- Quindi $a = a_1$ ($f$ è iniettiva)
+
+</Spoiler>
+
+<Spoiler title="Dimostriamo che f è suriettiva">
+
+- Dato $b \in B$ definiamo $a := g(b)$
+- Allora $f(g(b)) = f(a)$
+- Per definizione di inversa $f \circ g = \text{id}_B$
+- Quindi $b \in \text{Im}(f)$ ($f$ è suriettiva)
+
+</Spoiler>
+
+**"$\Leftarrow$" Se è biettiva allora è invertibile**  
+
+<Spoiler title="Mostra dimostrazione">
+
+- Siccome $f$ è suriettiva allora $\forall b \in B, \exist a : f(a) = b$
+- Essendo anche iniettiva $\forall b \in B, \exist! a \in A : f(a) = b$
+
+</Spoiler>
+</Callout>
+
+<br/>
+
+<Callout type="definizione" title="Lemma 2">
+Se $f : B \rightarrow B$ è invertibile allora la sua inversa è unica.
+</Callout>
+<Callout type="dimostrazione">
+**Assumiamo che $\exist g_1 : B \rightarrow A, g_2 : B \rightarrow A$ inverse di $f$ con $g_1 \neq g_2$**   
+
+- Se $g_1 \neq g_2$ allora $\exist b \in B : g_1(b) \neq g_2(b) \Rightarrow f(g_1(b)) \neq f(g_2(b))$
+- Ma per definizione di inversa $f \circ g_1 = f \circ g_2 = \text{id}_B$  
+- Quindi $g_1 = g_2$ (contraddizione)
+</Callout>
+
+<br/>
+
+<Callout type="definizione" title="Lemma 3">
+Una funzione $f : A \rightarrow B$:
+1. Ha un'inversa sinistra $g \circ f = \text{id}_A \Leftrightarrow f$ è iniettiva
+2. Ha un'inversa destra $f \circ g = \text{id}_B \Leftrightarrow f$ è suriettiva
+</Callout>
+<Callout type="dimostrazione">
+
+**1. Inversa Sinistra $\Leftrightarrow$ Iniettività**
+
+<Spoiler title="Se f è iniettiva ⇒ esiste un'inversa a sinistra g">
+
+**Costruzione di $g: B \to A$:**
+Per definire l'immagine $g(b)$ per ogni elemento $b \in B$, si distinguono due casi:
+- Se $b \in \text{Im}(f)$, poiché $f$ è iniettiva esiste un unico $a \in A$ tale che $f(a) = b$. Si pone quindi $g(b) = a$.
+- Se $b \notin \text{Im}(f)$ (cioè $b \in B \setminus \text{Im}(f)$), si sceglie un elemento arbitrario $a_0 \in A$ e si pone $g(b) = a_0$.
+
+**Verifica:**
+Per ogni $a \in A$, poiché $f(a) \in \text{Im}(f)$, per definizione di $g$ si ottiene $g(f(a)) = a$, ovvero $(g \circ f)(a) = \text{id}_A(a)$.
+</Spoiler>
+
+<Spoiler title="Se esiste un'inversa a sinistra g ⇒ f è iniettiva">
+
+- Siano $a_1, a_2 \in A$ tali che $f(a_1) = f(a_2)$.
+- Applicando $g$ a entrambi i membri si ottiene: $g(f(a_1)) = g(f(a_2))$.
+- Poiché $g \circ f = \text{id}_A$, segue che $a_1 = a_2$, il che dimostra che $f$ è iniettiva.
+</Spoiler>
+
+<br/>
+
+**2. Inversa Destra $\Leftrightarrow$ Suriettività**
+
+<Spoiler title="Se f è suriettiva ⇒ esiste un'inversa a destra g">
+
+**Costruzione di $g: B \to A$:**
+Poiché $f$ è suriettiva, per ogni $b \in B$ l'insieme delle pre-immagini non è vuoto. 
+Per ogni $b \in B$, si sceglie un elemento $a \in A$ tale che $f(a) = b$ e si definisce $g(b) = a$.
+
+**Verifica:**
+Per ogni $b \in B$, si ha $f(g(b)) = f(a) = b$, ovvero $(f \circ g)(b) = \text{id}_B(b)$, cioè $f \circ g = \text{id}_B$.
+</Spoiler>
+
+<Spoiler title="Se esiste un'inversa a destra g ⇒ f è suriettiva">
+
+- Sia $b \in B$ un elemento qualsiasi del codominio.
+- Scegliendo $a = g(b) \in A$, si calcola $f(a) = f(g(b)) = (f \circ g)(b) = \text{id}_B(b) = b$.
+- Quindi ogni elemento $b \in B$ ha almeno una pre-immagine in $A$, dimostrando che $f$ è suriettiva.
+</Spoiler>
+
+</Callout>
+
+<NavigazioneLezioni
+  prev={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base/3-Relazioni-e-operazioni",
+    title: "Relazioni e operazioni",
+    label: "Lezione precedente"
+  }}
+  next={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base",
+    title: "Matematica Base",
+    label: "Torna all'indice"
+  }}
+/>

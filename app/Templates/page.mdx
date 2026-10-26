@@ -130,6 +130,46 @@ Puoi anche aggiungere un'etichetta testuale opzionale al centro:
 
 <Wip text="Sezione in aggiornamento" />
 
+### Todo (Parti da Continuare)
+
+Usa `<Todo>` (oppure `<DaFare>`) per annotare compiti, dimostrazioni da approfondire, esercizi da completare o note di ripasso.
+Tutti i Todo del sito vengono **rilevati in automatico** e mostrati:
+1. Nella pagina panoramica interattiva [/Todo](/Todo) (con ricerca per parola chiave, filtri per materia, priorità e stato, e statistiche di avanzamento).
+2. Nel pulsante rapido con badge numerico in alto a destra nella **Navbar**, da cui puoi visualizzare al volo i promemoria senza abbandonare la lettura.
+
+#### Esempio base
+<Todo>
+  Completare la dimostrazione del Teorema di Bolzano inserendo il grafico delle intersezioni.
+</Todo>
+
+#### Con titolo, priorità alta e tag
+<Todo
+  title="Esercizi di Laboratorio 3"
+  priority="alta"
+  tag="Esercizi"
+>
+  Risolvere gli esercizi sulle funzioni ricorsive e verificare i casi limite con array vuoti.
+</Todo>
+
+#### Con stato "In corso"
+<Todo
+  title="Formulario di Geometria Analitica"
+  priority="media"
+  status="in-progress"
+  tag="Formulario"
+>
+  Aggiungere le formule per la distanza punto-piano e l'intersezione retta-piano.
+</Todo>
+
+#### Segnato come completato
+<Todo
+  title="Definizione di Limite di Successione"
+  priority="bassa"
+  status="done"
+>
+  Inserita definizione formale con gli $\epsilon$ e grafici esplicativi.
+</Todo>
+
 ### CodeCopy
 
 Il pulsante "Copia" appare automaticamente su ogni blocco di codice al hover.

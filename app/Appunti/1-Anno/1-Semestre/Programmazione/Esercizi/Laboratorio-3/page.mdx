@@ -1,0 +1,217 @@
+# Esercizi laboratorio lezione 3
+
+<Callout>
+Durante la presentazione di questi esercizi non sono ancora stati introdotti i cicli <a href="../Linguaggio-C/Blocchi-Condizionali">For</a>, tuttavia ho deciso di usarli per comoddià
+</Callout>
+## Es 1
+
+Scrivere un programma che chiede all'utente di inserire due numeri interi x e y e poi disegna sullo schermo un rettangolo (pieno) di * di lati x e y. Esempio: se l'utente inserisce 3, 5 allora il programma dovrà stampare
+
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int x, y;
+
+    printf("Inserisci la lunghezza\n");
+    scanf("%d",&x);
+    printf("Inserisci l'altezza\n");
+    scanf("%d",&y);
+    
+    for(int i = 0; i<y; i++)
+    {
+        for(int j = 0; j<x; j++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+
+}
+
+```
+</Spoiler>
+## Es 2
+
+Scrivere un programma che richiede l'inserimento di 10 numeri interi e alla fine scrive sullo schermo il valore massimo e il valore minimo che sono stati inseriti.
+
+
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int min = 0, max = 0, x;
+    
+    printf("Inserisci l'elemento numero: 1 | ");
+    scanf("%d",&x);
+    min = x;
+    max = x;
+    for (int i = 1; i<10; i++)
+    {
+        printf("Inserisci l'elemento numero: %d | ",i+1);
+        scanf("%d",&x);
+        if (x < min)
+        {
+            min = x;
+        }
+        else if (x > max)
+        {
+            max = x;
+        }
+    }
+    printf("Il minimo è: %d\nIl massimo è: %d\n",min,max);
+
+}
+
+```
+</Spoiler>
+## Es 3
+
+Scrivere un programma che richiede l'inserimento di 10 numeri interi e alla fine scrive sullo schermo il valore massimo e il secondo più grande che sono stati inseriti. Se quello che risulta essere il valore max è stato inserito due volte, allora verrà riportato come massimo e secondo massimo.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int max_1, max_2, x;
+    printf("Inserisci l'elemento numero: 1 | ");
+    scanf("%d",&max_1);
+    printf("Inserisci l'elemento numero: 2 | ");
+    scanf("%d",&max_2);
+    if(max_1 < max_2)
+    {
+        x = max_1;
+        max_1 = max_2;
+        max_2 = x;
+    }
+    for (int i = 2; i<10; i++)
+    {
+        printf("Inserisci l'elemento numero: %d | ",i+1);
+        scanf("%d",&x);
+        if(x > max_1)
+        {
+            max_2 = max_1;
+            max_1 = x;
+        }
+        else if(x > max_2 || (i == 1 && max_1 == max_2) )
+        {
+            max_2 = x;
+        }
+    }
+    printf("Il massimo in assoluto è: %d, mantre quello successivo è: %d\n",max_1,max_2);
+    
+}
+
+```
+</Spoiler>
+## Es 4
+
+Scrivere un programma che legge da tastiera sequenza di numeri interi positivi. L'immissione termina quando l'utente inserisce il valore 0. In output viene riportato <Tooltip text = "in realtà si chiede QUANTI sono i numeri consecutivi inseriti ">se la sequenza inserita conteneva due o più valori consecutivi uguali</Tooltip>. Esempio: nella sequenza 5 6 6 5 3 3 4 compaiono due volte due numeri consecutivi uguali; nella sequenza 3 3 3 4 2 2 compaiono tre volte due numeri consecutivi uguali.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int attuale = -1, precedente = -1;
+    int check = 0;
+    while (precedente != 0)
+    {
+        while (attuale < 0)
+        {
+            printf("Inserisci un numero intero positivo: ");
+            scanf("%d",&attuale);
+        }
+        if (attuale == precedente)
+        {
+            check += 1;
+        }
+        precedente = attuale;
+        attuale = -1;
+    }
+    if(check > 0)
+    {
+        printf("\nCi sono stati %d numeri consecutivi\n", check);
+    }
+    else
+    {
+        printf("\nNon ci sono stati numeri consecutivi\n");
+    }
+}
+
+```
+</Spoiler>
+## Es 5
+
+Numeri di Fibonacci. I numeri di Fibonacci, f1, f2, ... fn sono definiti ricorsivamente come segue:
+f1=1
+f2=1
+...
+fn = fn-1 +fn-2 .
+Scrivere un programma che prende in input un numero positivo N e scrive in output l' N-esimo numero di Fibonacci.
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int N, precedente = 0, attuale = 1;
+    
+    scanf("%d",&N);
+
+    for(int i = 0; i<N ; i++ )
+    {
+        attuale = attuale + precedente;
+        precedente = attuale - precedente;
+        printf("%d ,",attuale);
+    }
+    printf("\b\b");
+}
+
+```
+</Spoiler>
+## Es 6
+
+Scrivere un programma che prende in input 3 numeri interi e li riscrive in ordine crescente. (usando solo le 3 variabili dei numeri ?)
+
+<Spoiler>
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    int a, b, c;
+    scanf("%d",&a);
+    scanf("%d",&c);
+    if (a > c)
+    {
+        c = c + a;
+        a = c - a;
+        c = c - a;
+    }
+    scanf("%d",&b);
+    if (b > c )
+    {
+        c = c + b;
+        b = c - b;
+        c = c - b;
+    }
+    else if(a > b)
+    {
+        a = a + b;
+        b = a - b;
+        a = a - b;
+    }
+    printf("%d, %d, %d\n", a,b,c);
+}
+
+```
+</Spoiler>
+---
+
+<LessonNav/>

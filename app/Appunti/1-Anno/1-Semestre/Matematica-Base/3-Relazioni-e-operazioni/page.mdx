@@ -1,0 +1,63 @@
+# Relazioni e operazioni
+
+## Relazione 
+La relazione è definita come **sottoinsieme** di un prodotto cartesiano tra due insiemi, che rispecchia una certo criterio di connessione.
+
+### Proprietà che interessano le relazioni
+- **Riflessiva:** vale se $\forall a \in A, aRa$
+- **Antiriflessiva:** vale se $\forall a \in A, (a,a) \Rightarrow a \notin R$
+- **Simmetrica:** se $\forall a,b \in A, aRb \Rightarrow bRa$
+- **Antisimmetrica:** se $\forall a,b \in A, (aRb \land bRa) \Rightarrow a = b$
+- **Asimmetrica:** se $\forall a,b \in A, aRb \Rightarrow (b,a) \notin R$
+- **Transitiva:** se $(aRb \land bRc) \Rightarrow aRc$ 
+
+### Le relazioni più comuni sono:
+- relazioni d'**Uguaglianza:** ovvero il simbolo '$=$'
+  - Riflessiva
+  - Simmetrica
+  - Transitiva
+- relazioni d'**Ordine largo:** $\leq$ e $\geq$
+  - Riflessiva
+  - Antisimmetrica
+  - Transitiva
+- relazioni d'**Ordine stretto:** ovvero i simboli '$<$' e '$>$'
+  - Antiriflessiva
+  - Asimmetrica
+
+---
+
+## Operazione
+Un'**operazione** (o legge di composizione) è una regola matematica che associa ad uno o più elementi (chiamati operandi) un nuovo elemento ben definito. 
+
+Le operazioni matematiche più comuni sono le **operazioni binarie interne**, ovvero quelle che associano a una coppia di elementi appartenenti a un insieme $A$, un terzo elemento che appartiene anch'esso ad $A$.
+Formalmente, un'operazione binaria $*$ su $A$ è una funzione dal prodotto cartesiano $A \times A$ verso $A$:
+$$ * : A \times A \to A $$
+Al posto della rigorosa notazione funzionale $*(a, b)$, si usa quasi sempre la notazione infissa $a * b$ (ad esempio $a + b$ o $a \cdot b$).
+
+### Proprietà notevoli delle operazioni interne
+Fissata un'operazione interna $*$ su un insieme $A$, essa può godere di diverse proprietà fondamentali:
+
+- **Associatività**: $\forall a,b,c \in A, (a * b) * c = a * (b * c)$  
+  *(Permette di svolgere operazioni a catena senza curarsi delle parentesi).*
+- **Commutatività**: $\forall a,b \in A, a * b = b * a$
+- **Esistenza dell'Elemento Neutro**: $\exists e \in A : \forall a \in A, a * e = e * a = a$  
+  *(Come lo $0$ per l'addizione o l'$1$ per la moltiplicazione nei reali).*
+- **Esistenza dell'Elemento Simmetrico (o Inverso/Opposto)**: Se in $A$ esiste un elemento neutro $e$, un elemento $a \in A$ è detto simmetrizzabile (o invertibile) se $\exists a' \in A : a * a' = a' * a = e$.
+
+### Operazioni Esterne
+A differenza di quelle interne, un'**operazione esterna** combina un elemento proveniente da un insieme (detto dominio degli operatori o scalari, ad es. $K$) con un elemento dell'insieme $A$, restituendo un elemento appartenente ad $A$:
+$$ \cdot : K \times A \to A $$
+Un esempio tipico è la moltiplicazione di un vettore per uno scalare in geometria, che restituisce come risultato un nuovo vettore dilatato o contratto.
+
+<NavigazioneLezioni
+  prev={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base/2-Insiemi-numerici",
+    title: "Insiemi numerici",
+    label: "Lezione precedente"
+  }}
+  next={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base/4-Funzioni",
+    title: "Funzioni",
+    label: "Prossima lezione"
+  }}
+/>

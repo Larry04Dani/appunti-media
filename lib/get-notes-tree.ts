@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 
 // Definiamo la struttura (il "Tipo") di ogni elemento della nostra Sidebar.
 // Ogni elemento può essere una semplice cartella (che contiene figli) o una pagina cliccabile (se ha un url).
@@ -9,12 +10,10 @@ export type TreeNode = {
   children?: TreeNode[]; // Sottocartelle o pagine figlie
 };
 
-/**
- * Questa funzione legge il disco del server per esplorare le cartelle dentro "app/Appunti".
- * @param dirPath Il percorso assoluto della cartella da esplorare (es. "/Users/.../app/Appunti")
- * @param basePath L'URL di base corrispondente (es. "/Appunti")
- */
-export function buildTree(dirPath: string, basePath: string): TreeNode[] {
+let cachedTree: { key: string; time: number; data: TreeNode[] } | null = null;
+let cachedRoutes: { key: string; time: number; data: string[] } | null = null;
+
+function _buildTree(dirPath: string, basePath: string): TreeNode[] {
   // Se la cartella non esiste (es. l'utente non ha ancora creato "/Appunti"), restituiamo un array vuoto
   if (!fs.existsSync(dirPath)) {
     return [];
@@ -46,7 +45,7 @@ export function buildTree(dirPath: string, basePath: string): TreeNode[] {
 
       // Esploriamo ricorsivamente se ci sono sottocartelle!
       // (È qui la vera magia: la funzione chiama sé stessa per scendere nell'albero all'infinito)
-      const children = buildTree(fullPath, urlPath);
+      const children = _buildTree(fullPath, urlPath);
 
       // Aggiungiamo questo nodo alla nostra lista
       nodes.push({
@@ -64,11 +63,23 @@ export function buildTree(dirPath: string, basePath: string): TreeNode[] {
 }
 
 /**
- * Scansiona la cartella app per individuare tutte le rotte che contengono
- * un file page.mdx o page.tsx effettivo. Serve a Breadcrumbs per non creare link 404
- * su cartelle puramente organizzative (es. "/Appunti" o "Teoria/").
+ * Questa funzione legge il disco del server per esplorare le cartelle dentro "app/Appunti".
+ * Include memorizzazione in cache per evitare continue letture sincrone del filesystem.
+ * @param dirPath Il percorso assoluto della cartella da esplorare (es. "/Users/.../app/Appunti")
+ * @param basePath L'URL di base corrispondente (es. "/Appunti")
  */
-export function getAllPageRoutes(dirPath: string, basePath = ""): string[] {
+export const buildTree = cache((dirPath: string, basePath: string): TreeNode[] => {
+  const now = Date.now();
+  const cacheKey = `${dirPath}:${basePath}`;
+  if (cachedTree && cachedTree.key === cacheKey && now - cachedTree.time < 3000) {
+    return cachedTree.data;
+  }
+  const result = _buildTree(dirPath, basePath);
+  cachedTree = { key: cacheKey, time: now, data: result };
+  return result;
+});
+
+function _getAllPageRoutes(dirPath: string, basePath = ""): string[] {
   if (!fs.existsSync(dirPath)) return [];
   const routes: string[] = [];
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
@@ -83,7 +94,7 @@ export function getAllPageRoutes(dirPath: string, basePath = ""): string[] {
     }
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
-      const subRoutes = getAllPageRoutes(fullPath, `${basePath}/${entry.name}`);
+      const subRoutes = _getAllPageRoutes(fullPath, `${basePath}/${entry.name}`);
       routes.push(...subRoutes);
     } else if (/^page\.(mdx|tsx|jsx|js)$/.test(entry.name)) {
       routes.push(basePath || "/");
@@ -92,4 +103,20 @@ export function getAllPageRoutes(dirPath: string, basePath = ""): string[] {
 
   return routes;
 }
+
+/**
+ * Scansiona la cartella app per individuare tutte le rotte che contengono
+ * un file page.mdx o page.tsx effettivo. Serve a Breadcrumbs per non creare link 404
+ * su cartelle puramente organizzative (es. "/Appunti" o "Teoria/").
+ */
+export const getAllPageRoutes = cache((dirPath: string, basePath = ""): string[] => {
+  const now = Date.now();
+  const cacheKey = `${dirPath}:${basePath}`;
+  if (cachedRoutes && cachedRoutes.key === cacheKey && now - cachedRoutes.time < 3000) {
+    return cachedRoutes.data;
+  }
+  const result = _getAllPageRoutes(dirPath, basePath);
+  cachedRoutes = { key: cacheKey, time: now, data: result };
+  return result;
+});
 

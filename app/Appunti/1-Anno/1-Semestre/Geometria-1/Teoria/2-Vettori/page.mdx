@@ -1,0 +1,94 @@
+# Vettori
+
+Fissato un campo $K$, un **Vettore numerico su $K$** è una n-upla di elementi di $K$, scritta così:
+
+$$
+\vec{x} = 
+\begin{pmatrix} 
+x_1 \\ 
+x_2 \\ 
+\vdots \\
+x_n 
+\end{pmatrix}
+$$
+
+Denotiamo con:
+
+$$
+K^n = \{ \vec{x} =\begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} | x_i \in K \}
+$$
+#### Esempio di $K^2$
+
+I vettori $K^2$ possono essere rappresentati come una freccia nel grafico cartesiano.  
+In questo caso il vettore corrisponde a: $\vec{a} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}$
+
+<img
+  src="/images/geometria-1/rappresentazione-vettore-n2.png"
+  alt="Rappresentazione di un vettore in K^2"
+  className="rounded-xl border border-gray-200 dark:border-gray-800 shadow-xs max-w-md my-4"
+/>
+<Riferimento 
+title="Geogebra - Rappresentazione Vettore a 2 dimensioni"
+href = "https://www.geogebra.org/calculator/myxseqen">
+</Riferimento>
+
+#### Esempio di $K^3$
+
+Se invece consideriamo un vettore in $K^3$, questo può essere rappresentato facilmente come una freccia a 3 dimensioni.  
+In questo caso il vettore corrisponde a: $\vec{a} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$
+
+<img
+  src="/images/geometria-1/rappresentazione-vettore-n3.gif"
+  alt="Rappresentazione di un vettore in K^2"
+  className="rounded-xl border border-gray-200 dark:border-gray-800 shadow-xs max-w-md my-4"
+/>
+<Riferimento 
+title="Geogebra - Rappresentazione Vettore a 3 dimensioni"
+href = "https://www.geogebra.org/classic/e3mhzucc">
+</Riferimento>
+
+## Operazioni dei vettori
+
+### Somma tra vettori
+La somma è consentita solo tra vettori della stessa dimensione:  
+$ + : \R^n \times \R^n \rightarrow \R^n$
+
+Presi due vettori  
+$\vec{x} = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}$, $\vec{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}$
+
+ la loro somma restituisce un vettore dove l'n-esimo elemento è la somma degli n-esimi elementi dei singoli vettori
+
+$$
+\vec{x}+\vec{y} = \begin{pmatrix}x_1+y_1 \\ \vdots \\ x_n+y_n \end{pmatrix}
+$$
+
+- **L'lemento neutro** della somma è il vettore nullo $\vec{0} = \begin{pmatrix} 0 \\ \vdots \\ 0 \end{pmatrix}$
+- **L'inverso** (rispetto a '+') di un vettore $\vec{x}=\begin{pmatrix}x_1 \\ \vdots \\ x_n \end{pmatrix}$ è $-\vec{x}=\begin{pmatrix}-x_1 \\ \vdots \\ -x_n \end{pmatrix}$
+
+La somma di vettori soddisfa le proprietà:
+- **Communtativa**
+  - $\vec{x}+\vec{y}=\vec{y}+\vec{x}$
+- **Associativa**
+  - $(\vec{x}+\vec{y})+\vec{z}=\vec{x}+(\vec{y}+\vec{z})$
+---
+### Prodotto per scalare
+Il prodotto è consentito solo tra un vettore ed uno scalare
+
+Dato $\vec{x} = \begin{pmatrix}x_1 \\ \vdots \\ x_n \end{pmatrix} \in \R , \lambda \in \R $  
+
+Il prodotto tra $\lambda$ e $\vec{x}$ è definita così:
+$$
+\lambda \vec{x} = \begin{pmatrix} \lambda \cdot x_1 \\ \vdots \\ \lambda \cdot x_n \end{pmatrix}
+$$
+Ovviamente abbiamo che:
+- **Elemento assorbente**
+  - $0 \cdot \vec{x} = \vec{0}$
+- **Elemento neutro**
+  - $1 \cdot \vec{x} = \vec{x}$
+- **Proprietà associativa**
+  - $(\lambda_1 \cdot \lambda_2) \cdot \vec{x} = \lambda_1 \cdot (\lambda_2 \cdot \vec{x})$
+- **Proprietà distributiva**
+  - $\lambda \cdot (\vec{x} + \vec{y}) = \lambda \cdot \vec{x} + \lambda \cdot \vec{y}$
+  - $(\lambda_1 + \lambda_2) \cdot \vec{x} = \lambda_1 \cdot \vec{x} + \lambda_2 \cdot \vec{x}$
+
+<LessonNav/>

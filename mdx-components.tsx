@@ -14,6 +14,7 @@ import { P5Sketch } from '@/components/p5-sketch'
 import { Tooltip } from '@/components/tooltip'
 import { Wip } from '@/components/wip'
 import { FolderTree, StrutturaCartelle } from '@/components/folder-tree'
+import { Todo, DaFare } from '@/components/todo'
 import {
   NextLesson,
   ProssimaLezione,
@@ -109,6 +110,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     //      </FolderTree>
     FolderTree,
     StrutturaCartelle,
+
+    // TODO / DA FARE — per indicare parti da continuare, esercizi o note di lavoro
+    // Uso: <Todo>Completare dimostrazione</Todo>
+    //      <Todo title="Esercizi" priority="alta" tag="Esercizi">...</Todo>
+    //      <Todo title="Formulario" priority="bassa" done />
+    Todo,
+    DaFare,
 
     // NAVIGAZIONE TRA LEZIONI — per passare alla lezione successiva e/o precedente
     // Uso singolo:     <ProssimaLezione href="/Appunti/..." title="Tipi di dato" />

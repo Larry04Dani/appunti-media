@@ -1,6 +1,30 @@
-# Anelli, Campi e Numeri Complessi
+# Monidi, Gruppi, Anelli e Campi
 
-## Teoria degli Anelli
+### Definizione di Monoide
+Un monoide è un **insieme** $M$ dotato di un operazione:  
+$* : M \times M  \rightarrow M$
+1. **Proprietà associativa**
+   - $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+
+2. **Elemento neutro** $e$  
+   - $\forall a \in M, \exist e : a * e = a$
+
+### Definizione di gruppo
+Un gruppo è un insieme $G$ dotato di un operazione:  
+$* : G \times G  \rightarrow G$
+Che soddisdfa le seguenti proprietà:  
+1. **Proprietà associatuva**
+   - $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+
+2. **Elemento neutro** $e$  
+   - $\forall a \in G, \exist e : a * e = a$
+
+3- **Inverso**
+   - $\forall a \in G, \exist b : a * b = e$
+
+#### Esempi
+- ($\Z, +, 0 $) è un gruppo
+- ($\N, +, 0 $) è un monoide
 
 ### Definizione formale di Anello
 Un **anello** è una struttura algebrica $(A, +, \cdot)$ costituita da un insieme $A$ provvisto di due operazioni binarie interne (chiamate convenzionalmente *somma* e *prodotto*) che soddisfano le seguenti proprietà:
@@ -104,3 +128,5 @@ Dato $z = a + ib$:
 - **Inverso additivo:** $-z = -a - ib$
 - **Inverso moltiplicativo:** Per calcolare l'inverso moltiplicativo di $z$ (con $z \neq 0$), si moltiplicano numeratore e denominatore per $\bar{z}$:
   $$ z^{-1} = \frac{1}{z} = \frac{\bar{z}}{z \cdot \bar{z}} = \frac{a - ib}{a^2 + b^2} = \frac{\bar{z}}{|z|^2} $$
+
+<NextLesson/>

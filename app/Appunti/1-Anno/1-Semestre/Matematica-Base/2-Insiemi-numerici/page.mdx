@@ -1,0 +1,147 @@
+# Insiemi numerici
+
+## Operazioni tra insiemi
+Similmente alle proposizioni logiche è possibile fare operazioni tra insiemi, esse vengono chiamate:
+- Intersezione, si indica con $\cap$ e può essere definita così: $\forall x ( x \in (A \cap B)$ <Tooltip text="se e solo se">$\Leftrightarrow$</Tooltip>$( x \in A) \land (x \in B))$
+- Unione, si indica con $\cup$ e può essere definita così: $\forall x (x \in (A \cup B) \Leftrightarrow( x \in A) \lor (x \in B))$ 
+- Differenza, si indica con $\setminus$ e può essere definita così: $ \forall x ( x \in (A \setminus B) \Leftrightarrow (x \in A) \land \lnot(x \in B))$
+- Prodotto cartesiano, si indica con $\times$ e può essere definito così: $A \times B := \{(a,b) : a \in A, b \in B \}$ 
+- Complementare, si indica con $A^c$, e può essere definita così: $\forall x (x \in A^c \Leftrightarrow (x \in $<Tooltip text="Insieme Universo relativo, ovvero l'insieme che contiene tutti gli elementi di un contesto">U</Tooltip>$)\land(x \lnot \in A))$
+
+Inoltre si possono identificare delle relazioni tra due insiemi, in particolare:
+- $A \subset B$ significa che A è un sottoinsieme di B, ovvero: $(\forall x \in A, x \in B)$ <Tooltip text="Questa parte serve ad escludere il caso in cui anche tutti gli elementi di B appartengono ad A ">$\land \lnot(\forall x \in B, x \in B) $ </Tooltip>
+- $A \subseteq B$ significa che A è sottoinsieme di B e gli insiemi possono eventualmente coincidere
+
+Gli insiemi possono essere definiti in due modi:
+- Elencandone ogni elemento $A = \{a_1, a_2, a_3...a_n\}$
+- Definendo una regola di appartenenza $A = \{x \in B $<Tooltip text="'tale che'">:</Tooltip>$ P(x)\}$
+
+Esiste un particolare tipo di insieme chiamato insieme vuoto (che non contiene elementi) e si indica così: $\emptyset$  
+
+---
+
+## Numeri Naturali - $\N$
+
+I numeri naturali sono tutti i numeri interi positivi, compreso lo 0: 
+$$
+\N=\{0,1,2,3...,\infty\}
+$$
+I numeri naturali sono compatibili con l'operatore della somma e del prodotto
+
+### Proprietà della somma
+- **Chiusura:** $\forall a,b \in \N, (a+b) \in \N $ - Sommando due numeri in $\N$ si rimane in $\N$
+- **Associatività:** $\forall a,b,c \in \N, (a+b)+c = a+(b+c) $ - Non conta il posizionamento delle parentesi
+- **Elemento neutro:** $\exist 0 \in \N : \forall a \in \N, a+0 = a $ - Sommando un qualunque numero a 0 si ottiene lo stesso numero
+- **Commutatività:** $\forall a,b \in \N, (a+b) = (b+a) $ - L'ordine degli addendi non influisce sul risultato
+- **Cancellatività:** $\forall a,b,c \in \N, a+c = b+c \Rightarrow a=b$ - Si spiega da sola
+
+### Proprietà del prodotto
+- **Chiusura:** $\forall a,b \in \N, a\cdot b \in \N$ 
+- **Associatività:** $\forall a,b,c \in \N, (a \cdot b)\cdot c = a\cdot (b\cdot c) $ - Non conta il posizionamento delle parentesi
+- **Elemento neutro:** $\exist 1 \in \N : \forall a \in \N, a\cdot 1 = a $ - Moltiplicando un qualunque numero a 1 si ottiene lo stesso numero
+- **Elemento Assorbente:** $\exist 0 \in \N : \forall a \in \N, a \cdot 0 = 0$ - Moltiplicando un qualunque numero a 0 si ottiene 0
+- **Commutatività:** $\forall a,b \in \N, (a\cdot b) = (b\cdot a) $ - L'ordine dei fattori non influisce sul risultato
+- **Cancellatività:** $\forall a,b,c \in \N, a \cdot c = b \cdot c \Rightarrow a=b$ - Si spiega da sola
+
+---
+
+## Numeri Interi - $\Z$
+Per introdurre il concetto di sottrazione, introduciamo l'insieme dei numeri interi
+$$
+\Z = \{0,1,-1,2,-2,3,-3...\}
+$$
+Le proprietà dei numeri **Naturali** si estendono anche nei numeri **Interi**, con l'aggiunta dell'**Opposto** 
+$$
+\forall a \in \Q \exist \text{opposto} : a - \text{opposto} = 0
+$$
+Quindi preso un numero positivo **$a$**, esiste sempre un corrispettivo negativo **$-a$**
+
+---
+
+## Numeri Razionali - $\Q$
+
+Oltre al concetto di **opposto** esiste anche il concetto di **Inverso**: si indica con $a^{-1}$ e corrisponde a $\frac{1}{a}$
+
+Per dare senso a questa espressione bisogna introdurre l'insieme dei numeri razionali $\Q$
+$$
+\Q = \{\frac{p}{q} : p \in \Z , q \in \Z, q \neq 0\}
+$$
+oppure:
+$$
+\Q = \{\frac{p}{q} : p \in \Z, q \in \N^{+}\}
+$$
+Vale la seguente proprietà:
+$$
+\frac{p}{q} = \frac{n}{m} \Leftrightarrow pm = qn
+$$
+
+$\Q$ è il primo insieme che può rientrare nella definizione di **Campo**
+
+---
+
+## Numeri Irrazionali - $\mathbb{I}$
+
+I numeri irrazionali nascono da un problema geometrico apparentemente semplice: applicare il teorema di Pitagora per conoscere la lunghezza dell'ipotenusa di un triangolo rettangolo con cateti lunghi 1.
+
+<Callout type="dimostrazione">
+Si vuole trovare una soluzione del tipo $2 = (\frac{p}{q})^2 : p,q$ sono coprimi.
+
+Affinchè $p$ e $q$ siano coprimi è necessario non siano entrambi pari.  
+Riscriviamo l'equazione moltiplicando entrambi i termini per $q^2$:  
+$2 \cdot q^2 = p^2$  
+Dato che la quantità a sinistra è sicuramente pari, $p^2$ deve essere pari, e noi sappiamo che i quadrati dei numeri dispari sono sempre dispari.  
+Quindi $p$ non può che essere pari, ottimo! Allora $q$ deve essere dispari.  
+Possiamo scrivere $p$ come $2 \cdot m$ dove $m \in \N^+$ (essendo pari):  
+$2 \cdot q^2 = 4\cdot m^2$  
+Semplifichiamo:  
+$q^2 = 2\cdot m^2$  
+Attenzione! Se la quantità a destra è pari allora anche $q^2$ deve esserlo, di conseguenza $q$ è pari.
+</Callout>
+
+Questo significa che non esiste una rappresentazione finita sotto forma di frazione del numero che stiamo cercando.
+
+---
+
+## Numeri Reali - $\R$
+$\R$ è un campo ordinato ed è completo, ciò significa che rispetta le seguenti proprietà:
+- **Densità**: Tra due numeri reali distinti esiste sempre un altro numero reale
+- **Infinità**: L'insieme è illimitato positivamente e negativamente
+- **Chiusura**: Qualunque operazione elementare restituisce un nuovo numero che fa ancora parte dell'insieme
+
+Può essere visto semplicemente come l'unione di $\Q$ è $\mathbb{I} $
+
+---
+
+## Il Campo dei Numeri Complessi ($\mathbb{C}$)
+
+### Costruzione algebrica
+Il campo $\mathbb{C}$ si definisce come $\R^2$ arricchito dall'introduzione dell'**unità immaginaria** $i$, un elemento definito tramite la proprietà:
+$$ i^2 = -1 $$
+Ogni numero complesso è tipicamente espresso nella sua *forma algebrica*: $z = a + ib$ con $a, b \in \R$.
+
+### Operazioni aritmetiche
+Dati $z_1 = a + ib$ e $z_2 = c + id$:
+- **Somma:** $(a + ib) + (c + id) = (a + c) + i(b + d)$
+- **Prodotto:** $(a + ib) \cdot (c + id) = (ac - bd) + i(ad + bc)$
+
+### Proprietà ed elementi caratteristici
+Dato $z = a + ib$:
+- **Parte Reale e Immaginaria:** $\text{Re}(z) = a$, e $\text{Im}(z) = b$ (che è un numero reale).
+- **Complesso Coniugato:** $\bar{z} = a - ib$. Molto utile nel calcolo, dato che il prodotto $z \cdot \bar{z} = a^2 + b^2$ restituisce uno scalare reale non negativo.
+- **Modulo:** $|z| = \sqrt{a^2 + b^2} = \sqrt{z \cdot \bar{z}}$
+- **Inverso additivo:** $-z = -a - ib$
+- **Inverso moltiplicativo:** Per calcolare l'inverso moltiplicativo di $z$ (con $z \neq 0$), si moltiplicano numeratore e denominatore per $\bar{z}$:
+  $$ z^{-1} = \frac{1}{z} = \frac{\bar{z}}{z \cdot \bar{z}} = \frac{a - ib}{a^2 + b^2} = \frac{\bar{z}}{|z|^2} $$
+
+<NavigazioneLezioni
+  prev={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base/1-Fondamenti-di-logica",
+    title: "Fondamenti di logica",
+    label: "Lezione precedente"
+  }}
+  next={{
+    href: "/Appunti/1-Anno/1-Semestre/Matematica-Base/3-Relazioni-e-operazioni",
+    title: "Relazioni e operazioni",
+    label: "Prossima lezione"
+  }}
+/>

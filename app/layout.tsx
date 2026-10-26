@@ -1,28 +1,19 @@
 import type { Metadata } from "next";
-// Importa i font di Google ottimizzati da Next.js. 
-// Risorsa: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
-import { Geist, Geist_Mono } from "next/font/google";
+// Importa i font Geist in locale per evitare richieste esterne a Google Fonts che causano timeout e freeze del rendering
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 // Importa il file CSS globale dove abbiamo definito i colori base e Tailwind
 import "./globals.css";
+
+// Importa KaTeX CSS in locale da node_modules invece del CDN esterno jsdelivr
+import "katex/dist/katex.min.css";
 
 // Importa i nostri componenti per il tema (Chiaro/Scuro)
 import { ThemeProvider } from "@/components/theme-provider";
 
 // Importa la barra di navigazione (Navbar) che abbiamo creato
 import { Navbar } from "@/components/navbar";
-
-// Configurazione dei font. Next.js li scaricherà al momento della build
-// per non rallentare il caricamento della pagina per l'utente finale.
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // Questi sono i metadati SEO (Titolo della scheda del browser, descrizione, ecc.)
 // Risorsa: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
@@ -36,6 +27,7 @@ export const metadata: Metadata = {
 // `children` rappresenta il contenuto specifico della pagina in cui ti trovi (es. page.mdx).
 // Importiamo la funzione che abbiamo creato per esplorare le cartelle
 import { buildTree, getAllPageRoutes } from "@/lib/get-notes-tree";
+import { getAllTodos } from "@/lib/get-todos";
 import path from "path";
 import { Sidebar } from "@/components/sidebar";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -58,24 +50,19 @@ export default async function RootLayout({
   // Raccogliamo tutte le rotte che hanno effettivamente un file page.mdx/tsx
   const validRoutes = getAllPageRoutes(appPath);
 
+  // Raccogliamo tutti i Todo presenti nelle varie dispense
+  const todos = getAllTodos(appPath);
+
   return (
     // suppressHydrationWarning è necessario per next-themes, evita errori quando il server
     // genera la pagina ma non sa ancora se l'utente preferisce il tema chiaro o scuro.
     <html lang="it" suppressHydrationWarning>
-      <head>
-        {/* Questo link serve a caricare il CSS per la matematica (formule) */}
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
-        />
-      </head>
-      
       {/* 
         Il body fa da contenitore a pieno schermo per l'intero sito.
         ATTENZIONE: Le classi 'prose' sono state spostate più in basso, nel tag <main>.
         Se le lasciassimo nel <body>, influenzerebbero lo stile della Sidebar rovinandola!
       */}
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans bg-background text-foreground antialiased min-h-screen flex flex-col overflow-x-hidden`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans bg-background text-foreground antialiased min-h-screen flex flex-col overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -83,8 +70,8 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NotesTreeProvider tree={tree} validRoutes={validRoutes}>
-            {/* Navbar a larghezza intera e sticky */}
-            <Navbar />
+            {/* Navbar a larghezza intera e sticky con sheet dei Todo */}
+            <Navbar todos={todos} />
 
             {/* Contenitore principale centrato, largo al massimo 1280px (max-w-7xl) */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8">
