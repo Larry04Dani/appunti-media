@@ -25,11 +25,23 @@ A + B = \begin{pmatrix} a_{1,1}+b_{1,1} & \dots & a_{1,m}+b_{1,m} \\ \vdots & \d
 $$
 
 ### Prodotto tra matrici
+Il prodotto tra matrici è consentito solo tra matrici che rispecchiano queste dimensioni:
+$$
+A \in M(m \times n,\K), B \in M(n \times k , K) 
+$$
+
+La matrice risultante $A \cdot B \in M(m \times k, \K)$  
+L'entrata ij della matrice risultante è data da:
+$$
+(A \cdot B)_{i,j} = \sum_{l=1}^{n} a_{i,l} \cdot b_{i,l}
+$$
+
+<Callout type="attenzione">Il prodotto riga per colonna **non** è commutativo</Callout>
 <Todo
 title="Matrici - Da continuare"
 priority="high"
 >
-- Proprietà
-- Prodotto tra Matrici
+- Matrice quadrata
+- Matrice identità
 </Todo>
 <LessonNav/>
