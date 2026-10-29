@@ -133,6 +133,53 @@
   --secondary: #d8dee9;
 }
 
+/* Tema Mono (Bianco e Nero) - Stile minimale ad alto contrasto */
+:root[data-theme="mono"],
+:root[data-theme="bw"],
+:root[data-theme="monochrome"] {
+  --background: #ffffff;
+  --body-bg: #fafafa;
+  --foreground: #121212;
+  --primary: #000000;
+  --secondary: #4b5563;
+}
+:root[data-theme="mono"].dark,
+:root[data-theme="bw"].dark,
+:root[data-theme="monochrome"].dark {
+  --background: #0f0f0f;
+  --body-bg: #000000;
+  --foreground: #f4f4f5;
+  --primary: #ffffff;
+  --secondary: #a1a1aa;
+}
+
+/* Rifiniture tipografiche per il tema Bianco e Nero */
+:root[data-theme="mono"] .prose a,
+:root[data-theme="bw"] .prose a,
+:root[data-theme="monochrome"] .prose a {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--foreground) 30%, transparent);
+}
+:root[data-theme="mono"] .prose a:hover,
+:root[data-theme="bw"] .prose a:hover,
+:root[data-theme="monochrome"] .prose a:hover {
+  text-decoration-color: var(--primary);
+  text-decoration-thickness: 2px;
+}
+:root[data-theme="mono"] code:not(pre code),
+:root[data-theme="bw"] code:not(pre code),
+:root[data-theme="monochrome"] code:not(pre code) {
+  background-color: color-mix(in srgb, var(--foreground) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+:root[data-theme="mono"] .prose blockquote,
+:root[data-theme="bw"] .prose blockquote,
+:root[data-theme="monochrome"] .prose blockquote {
+  border-left-color: var(--foreground);
+}
+
 /* Applica i colori di sfondo e del testo decisi sopra all'intero corpo della pagina */
 body {
   background: var(--body-bg, var(--background));

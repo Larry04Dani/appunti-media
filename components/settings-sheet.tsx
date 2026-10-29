@@ -29,6 +29,11 @@ export function SettingsSheet() {
 
   const colorThemes = [
     { id: "blue", label: "Blue", color: "bg-blue-500" },
+    {
+      id: "mono",
+      label: "Mono",
+      color: "bg-[linear-gradient(135deg,#171717_50%,#ffffff_50%)] border border-neutral-400 dark:border-neutral-500",
+    },
     { id: "nord", label: "Nord", color: "bg-[#5e81ac]" },
     { id: "rose", label: "Rose", color: "bg-[#d97a96]" },
     { id: "sage", label: "Sage", color: "bg-[#639c76]" },

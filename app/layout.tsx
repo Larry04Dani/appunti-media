@@ -57,6 +57,13 @@ export default async function RootLayout({
     // suppressHydrationWarning è necessario per next-themes, evita errori quando il server
     // genera la pagina ma non sa ancora se l'utente preferisce il tema chiaro o scuro.
     <html lang="it" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("color-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();`,
+          }}
+        />
+      </head>
       {/* 
         Il body fa da contenitore a pieno schermo per l'intero sito.
         ATTENZIONE: Le classi 'prose' sono state spostate più in basso, nel tag <main>.
