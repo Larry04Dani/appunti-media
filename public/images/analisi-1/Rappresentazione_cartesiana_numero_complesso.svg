@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 310" class="w-full h-auto">
+  <!-- Griglia cartesiana leggera -->
+  <g stroke="currentColor" stroke-width="1" stroke-opacity="0.1" stroke-dasharray="3,3">
+    <!-- Linee verticali (x = -2..4) -->
+    <line x1="50"  y1="25" x2="50"  y2="285" />
+    <line x1="100" y1="25" x2="100" y2="285" />
+    <line x1="150" y1="25" x2="150" y2="285" />
+    <line x1="200" y1="25" x2="200" y2="285" />
+    <line x1="250" y1="25" x2="250" y2="285" />
+    <line x1="300" y1="25" x2="300" y2="285" />
+    <line x1="350" y1="25" x2="350" y2="285" />
+
+    <!-- Linee orizzontali (y = -1..4) -->
+    <line x1="20" y1="270" x2="395" y2="270" />
+    <line x1="20" y1="220" x2="395" y2="220" />
+    <line x1="20" y1="170" x2="395" y2="170" />
+    <line x1="20" y1="120" x2="395" y2="120" />
+    <line x1="20" y1="70"  x2="395" y2="70" />
+  </g>
+
+  <!-- Assi Cartesiani (Piano di Gauss) -->
+  <g stroke="currentColor" stroke-width="2">
+    <!-- Asse Reale (Orizzontale) -->
+    <line x1="25" y1="220" x2="392" y2="220" />
+    <!-- Asse Immaginario (Verticale) -->
+    <line x1="150" y1="290" x2="150" y2="18" />
+  </g>
+  <!-- Frecce degli assi -->
+  <polygon points="405,220 390,215 393,220 390,225" fill="currentColor" />
+  <polygon points="150,8 145,23 150,20 155,23" fill="currentColor" />
+
+  <!-- Tacche numeriche assi -->
+  <g stroke="currentColor" stroke-width="1.5">
+    <!-- Tacche Asse Reale -->
+    <line x1="50"  y1="216" x2="50"  y2="224" />
+    <line x1="100" y1="216" x2="100" y2="224" />
+    <line x1="200" y1="216" x2="200" y2="224" />
+    <line x1="250" y1="216" x2="250" y2="224" />
+    <line x1="300" y1="216" x2="300" y2="224" />
+    <line x1="350" y1="216" x2="350" y2="224" />
+
+    <!-- Tacche Asse Immaginario -->
+    <line x1="146" y1="270" x2="154" y2="270" />
+    <line x1="146" y1="170" x2="154" y2="170" />
+    <line x1="146" y1="120" x2="154" y2="120" />
+    <line x1="146" y1="70"  x2="154" y2="70" />
+  </g>
+
+  <!-- Numeri e Lettere assi -->
+  <g fill="currentColor" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle">
+    <!-- Numeri Asse Reale -->
+    <text x="50"  y="238">-2</text>
+    <text x="100" y="238">-1</text>
+    <text x="140" y="236" font-size="11" opacity="0.6">0</text>
+    <text x="200" y="238">1</text>
+    <text x="250" y="238" font-weight="bold" fill="var(--primary)">2 (a)</text>
+    <text x="300" y="238">3</text>
+    <text x="350" y="238">4</text>
+    <text x="395" y="244" font-weight="bold" font-size="13">Re(z)</text>
+
+    <!-- Numeri Asse Immaginario -->
+    <text x="132" y="274">-1</text>
+    <text x="132" y="174">1i</text>
+    <text x="132" y="124">2i</text>
+    <text x="126" y="74" font-weight="bold" fill="var(--primary)">3i (b)</text>
+    <text x="150" y="15" font-weight="bold" font-size="13" text-anchor="start" dx="10">Im(z)</text>
+  </g>
+
+  <!-- Proiezioni tratteggiate verso Re e Im -->
+  <g stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="4,4" stroke-opacity="0.6">
+    <!-- Verticale verso x=2 -->
+    <line x1="250" y1="220" x2="250" y2="70" />
+    <!-- Orizzontale verso y=3 -->
+    <line x1="150" y1="70"  x2="250" y2="70" />
+  </g>
+
+  <!-- Arco dell'angolo theta -->
+  <path 
+    d="M 185 220 A 35 35 0 0 0 170 190" 
+    fill="none" 
+    stroke="var(--primary)" 
+    stroke-width="1.5" 
+    stroke-opacity="0.8" 
+  />
+  <text x="185" y="198" font-family="system-ui, sans-serif" font-size="12" fill="var(--primary)" font-weight="bold">θ</text>
+
+  <!-- Vettore posizione dal centro al numero complesso z -->
+  <line 
+    x1="150" 
+    y1="220" 
+    x2="243.9" 
+    y2="79.2" 
+    stroke="var(--primary)" 
+    stroke-width="3" 
+    stroke-linecap="butt" 
+  />
+  <!-- Freccia del vettore z -->
+  <polygon 
+    points="250,70 237.2,78.3 243.9,79.2 247.2,85" 
+    fill="var(--primary)" 
+  />
+
+  <!-- Etichetta raggio/modulo rho -->
+  <text 
+    x="190" 
+    y="140" 
+    font-family="system-ui, sans-serif" 
+    font-size="13" 
+    fill="var(--primary)" 
+    font-style="italic" 
+    font-weight="bold"
+  >
+    ρ = |z|
+  </text>
+
+  <!-- Punto z = 2 + 3i -->
+  <circle cx="250" cy="70" r="4.5" fill="var(--primary)" stroke="var(--background)" stroke-width="1.5" />
+
+  <!-- Badge / Etichetta con formula z = a + ib -->
+  <g font-family="system-ui, -apple-system, sans-serif" font-weight="bold">
+    <rect 
+      x="262" 
+      y="54" 
+      width="112" 
+      height="30" 
+      rx="6" 
+      fill="var(--background)" 
+      stroke="var(--primary)" 
+      stroke-width="1.5" 
+    />
+    <text x="272" y="74" font-size="13" fill="var(--primary)">z = 2 + 3i</text>
+  </g>
+</svg>

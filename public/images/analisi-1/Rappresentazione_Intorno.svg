@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 170" class="w-full h-auto">
+  <defs>
+    <style>
+      .txt { font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="white"/>
+  <!-- Asse Reale Principale (R) -->
+  <line x1="30" y1="85" x2="635" y2="85" stroke="currentColor" stroke-width="2" />
+  <!-- Freccia Asse R -->
+  <polygon points="648,85 634,80 637,85 634,90" fill="currentColor" />
+  <text x="658" y="89" fill="currentColor" class="txt" font-weight="bold" font-size="16">ℝ</text>
+
+  <!-- Insieme A visualizzato sull'asse (segmento colorato dal tema) -->
+  <line x1="280" y1="85" x2="400" y2="85" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" />
+
+
+  <!-- ─── 1. INTORNO DI x0 (Punto interno ad A) ─── -->
+  <!-- Area ombreggiata dell'intorno I(x0, eps) -->
+  <rect x="280" y="68" width="120" height="34" rx="6" fill="var(--primary)" fill-opacity="0.15" stroke="var(--primary)" stroke-width="0" stroke-dasharray="3,3"/>
+  <!-- Parentesi tonda aperta ( a x0 - eps -->
+  <path d="M 282 72 Q 277 85 282 98" stroke="var(--primary)" stroke-width="2" fill="none" />
+  <!-- Parentesi tonda chiusa ) a x0 + eps -->
+  <path d="M 397 72 Q 402 85 397 98" stroke="var(--primary)" stroke-width="2" fill="none" />
+  
+  <!-- Punto x0 (Pieno, x0 appartiene ad A) -->
+  <circle cx="340" cy="85" r="5" fill="currentColor" stroke="var(--background)" stroke-width="1.5" />
+  <!-- Etichette x0 -->
+  <text x="340" y="48" fill="currentColor" class="txt" font-weight="bold" font-size="14" text-anchor="middle">x₀</text>
+  <text x="340" y="122" fill="currentColor" class="txt" font-weight="medium" font-size="12" text-anchor="middle">I(x₀, ε)</text>
+
+  
+</svg>

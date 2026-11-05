@@ -1,25 +1,19 @@
 #include <stdio.h>
-
-
-int fibonacci(int n) {
-    if (n == 0) return 0;
-    else if (n == 1) return 1;
-    else return fibonacci(n - 1) + fibonacci(n - 2);
+int perfetto(int x)
+{
+    int somma = 0;
+    for(int i = 1; i <= x/2;i++)
+    {
+        x % i == 0 ? somma += i : 0;
+    }
+    if (somma == x)return 1;
+    return 0;
 }
 
-
-int main()
+int main(void)
 {
-    int n;
-    do
+    for (int i = 1; i < 10000 ; i++)
     {
-        printf("inserisci un numero naturale\n");
-        scanf("%d",&n);
-        for (int i = 1; fibonacci(i) <= n; i++)
-        {
-            if (fibonacci(i) == n)printf("Il valore %d è il numero di Fibonacci corrispondente a fib(%d)",n,i);
-        }
-
+        perfetto(i) ? printf("%d\n",i) : 0 ;
     }
-    while (n!=0);
 }

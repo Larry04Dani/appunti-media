@@ -1,0 +1,75 @@
+<ol><font size="4">
+<li>
+<i> Varie su vettori </i> <br>Scrivere un programma che:
+<ul>
+<li>Genera un vettore random di 35 valori interi tra 15 e 85. 
+</li><li>Lo stampa sullo schermo (ben incolonnato con 7 numeri per riga).
+</li><li>Calcola la media (restituisce il valore corrispondente)
+</li><li>Calcola quanti valori pari sono stati generati
+</li><li>Calcola il valore minimo (restituisce l'indice)
+</li><li>Controlla se ci sono due elementi consecutivi uguali (restituisce l'indice del primo dei due oppure -1 se non ci sono)
+</li><li>Controlla se tutti gli elementi sono distinti (restituisce 1 oppure 0)
+
+</li></ul>
+Ognuno dei punti precedenti deve essere svolto con una (diversa) funzione mentre nel main vengono stampati tutti i vari risultati restituiti dalle funzioni. (Utilizzare eventualmente come base il programma 
+<a href="https://www.mat.uniroma2.it/~giammarr/Teaching/LabInf1/Laboratorio/Vettori.c">)
+<font color="purple">Vettori.c</font></a> 
+visto a lezione.)
+
+</li>
+<li> <i>Congettura di Collatz ver.3  </i> <br>
+In riferimento alla Congettura di Collatz (EseLab06_3 e EseLab07_5),
+Scrivere una funzione Collatz  che prende in input un numero intero x  e 
+	restituisce la sua lunghezza di Collatz Lc(x). 
+	Scrivere poi un programma che, usando tale funzione, 
+	calcola la lunghezza di Collatz di tutti i numeri tra 1 e 1000 e li scrive in un array. 
+	Calcola poi il valore massimo di tale lunghezza tra quelli ottenuti e stampa sullo schermo quali sono i numeri interi che hanno tale lunghezza di Collatz massima.
+
+</li> 	
+	<li>
+<i>Crivello di Eratostene </i>  <br>
+ Implementare una funzione che simula il
+<a style="color: #990099; font-weight:
+   bold " href="http://it.wikipedia.org/wiki/Crivello_di_Eratostene" target="_blank"> crivello di Eratostene </a> per il calcolo dei
+   numeri primi. Utilizzarla per calcolare tutti i numeri primi tra 2
+   e 1000. <br> La funzione <tt>int Crivello(int C[], int n)</tt> sarà definita su un 
+ array booleano C di dimensione n tale che  
+<ul>
+<li>C[i] =1 significa che i è primo  e 
+C[i] =0 significa che i NON è primo  
+
+</li><li>All’inizio pongo C[i]=1 per ogni i
+</li><li>Realizzo n-1 cicli che iniziano ogni volta dall’elemento che contiene il primo 1
+</li><li>
+Se un ciclo comincia da C[i] allora assegno 0 a tutti i C[j] tale che j è un multiplo di i
+</li></ul>
+</li>
+<li>
+Scrivere una funzione <tt> int Search(int v[], int n, int key) </tt> 
+	che controlla se il valore key è presente nel vettore v, di dimensione n e restituisce l'indice della sua 
+posizione, se lo trova, 
+oppure restituisce -1 se non lo trova. <br>
+Scrivere poi un programma (funzione main) che genera e stampa un vettore di dimensione 100 
+	di valori interi random  tra 1 e 100 e poi chiede all'utente di inserire un valore da 1 a 100 e 
+richiamando la funzione <tt>Search</tt> 
+	verifica se è presente nel vettore e stampa le informazioni calcolate.
+</li>
+	</font><li><font size="4">
+<i>Problema del Baricentro </i> (tratto da un vecchio esame)<br>
+Dato un vettore v di interi  di dimensione n, definisco <i>baricentro</i> del vettore l’indice i tale che:
+<br>
+v[0] + v[1] + . . . + v[i] = v[i + 1] + . . . + v[n − 1]
+
+<ul><li>
+Scrivere una funzione <tt> int baricentro(int v[], int n) </tt> che restituisce l'indice del baricentro del vettore v, se esiste, 
+oppure restituisce -1 se non esiste un baricentro. 
+
+</li><li> 
+Scrivere poi un programma (funzione main) che genera e stampa un vettore di dimensione 100 
+	di valori interi random  tra -5 e 5 e poi, richiamando la funzione <tt>baricentro</tt> 
+	calcola il suo baricentro.
+ </li>
+</ul>
+	
+</font>
+</li></ol>

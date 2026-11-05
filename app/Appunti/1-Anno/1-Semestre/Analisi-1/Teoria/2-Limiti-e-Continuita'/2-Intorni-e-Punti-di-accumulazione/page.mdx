@@ -1,0 +1,44 @@
+# Intorni e Punti di accumulazione
+
+## Intorno
+
+Un intorno di un punto $x_0$ è fondamentalmente un intervallo aperto che contiene $x_0$  
+esistono diversi tipi di intorno, in seguito li elencherò dal più generale a più specifico
+
+- **Intorno completo** $I_\varepsilon(x_0) = (x_0-\delta_1 , x_0 + \delta_2)$
+    - Dove $\delta_1$ e $\delta_2$ sono due numeri positivi.
+- **Intorno circolare** $I_\varepsilon(x_0) = (x_0-\varepsilon , x_0 + \varepsilon)$
+    - Dove $\varepsilon$ è un numero positivo.
+- **Intorno destro** $I_\varepsilon(x_0) = (x_0-\varepsilon , x_0)$
+- **Intorno sinistro** $I_\varepsilon(x_0) = (x_0, x_0 + \varepsilon)$
+
+<SvgDiagram
+  src="/images/analisi-1/Rappresentazione_Intorno.svg"
+  alt="Rappresentazione grafica dei punti di accumulazione"
+  caption="L'intorno di x₀ interseca l'insieme R in infiniti punti"
+  maxWidth="max-w-2xl"
+/>
+
+
+## Punto di accumulaione
+
+Consideriamo un insieme $A \subseteq \R$, e sia $x_0 \in \R$ un punto qualunque.
+
+
+<Callout type="definizione">
+$x_0 \in \R$ è un **Punto di accumulazione** per $A \subseteq \R$  
+se $\forall \varepsilon > 0, \exist y \in E, y \neq 0 : y \in B(x_0, \varepsilon)$
+</Callout>
+
+In altre parole, $x_0$ è un punto di accumulazione per $A$ se preso un qualunque intorno di $x_0$, quell'intorno contiene infiniti punti
+
+Nell'immagine seguente entrambi i punti $x_0,x_1$ sono punti di accumulaione, anche se $x_1$ non fa parte dell'insieme
+
+<SvgDiagram
+  src="/images/analisi-1/Rappresentazione_Punto_di_Accumulazione.svg"
+  alt="Rappresentazione grafica dei punti di accumulazione"
+  caption="$x_0$ è punto di accumulazione interno ($x_0 \in A$), $x_1$ è punto di accumulazione esterno ($x_1 \notin A$)"
+  maxWidth="max-w-2xl"
+/>
+
+<LessonNav/>

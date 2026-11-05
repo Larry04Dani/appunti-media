@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 280" class="w-full h-auto">
+  <!-- Griglia cartesiana leggera -->
+  <g stroke="currentColor" stroke-width="1" stroke-opacity="0.12" stroke-dasharray="3,3">
+    <!-- Linee verticali (x = 1..5) -->
+    <line x1="120" y1="30" x2="120" y2="230" />
+    <line x1="170" y1="30" x2="170" y2="230" />
+    <line x1="220" y1="30" x2="220" y2="230" />
+    <line x1="270" y1="30" x2="270" y2="230" />
+    <line x1="320" y1="30" x2="320" y2="230" />
+
+    <!-- Linee orizzontali (y = 1..4) -->
+    <line x1="70" y1="180" x2="350" y2="180" />
+    <line x1="70" y1="130" x2="350" y2="130" />
+    <line x1="70" y1="80"  x2="350" y2="80" />
+    <line x1="70" y1="30"  x2="350" y2="30" />
+  </g>
+
+  <!-- Assi Cartesiani con frecce integrate -->
+  <g stroke="currentColor" stroke-width="2">
+    <!-- Asse X -->
+    <line x1="45" y1="230" x2="348" y2="230" />
+    <!-- Asse Y -->
+    <line x1="70" y1="250" x2="70" y2="22" />
+  </g>
+  <!-- Frecce degli assi -->
+  <polygon points="360,230 346,225 349,230 346,235" fill="currentColor" />
+  <polygon points="70,10 65,24 70,21 75,24" fill="currentColor" />
+
+  <!-- Tacche numeriche assi -->
+  <g stroke="currentColor" stroke-width="1.5">
+    <!-- Tacche Asse X -->
+    <line x1="120" y1="226" x2="120" y2="234" />
+    <line x1="170" y1="226" x2="170" y2="234" />
+    <line x1="220" y1="226" x2="220" y2="234" />
+    <line x1="270" y1="226" x2="270" y2="234" />
+    <line x1="320" y1="226" x2="320" y2="234" />
+
+    <!-- Tacche Asse Y -->
+    <line x1="66" y1="180" x2="74" y2="180" />
+    <line x1="66" y1="130" x2="74" y2="130" />
+    <line x1="66" y1="80"  x2="74" y2="80" />
+  </g>
+
+  <!-- Numeri e Lettere assi -->
+  <g fill="currentColor" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle">
+    <!-- Numeri Asse X -->
+    <text x="70" y="246" font-size="11" opacity="0.6">0</text>
+    <text x="120" y="248">1</text>
+    <text x="170" y="248">2</text>
+    <text x="220" y="248" font-weight="bold" fill="var(--primary)">3</text>
+    <text x="270" y="248">4</text>
+    <text x="320" y="248">5</text>
+    <text x="360" y="248" font-weight="bold">x</text>
+
+    <!-- Numeri Asse Y -->
+    <text x="54" y="184">1</text>
+    <text x="54" y="134" font-weight="bold" fill="var(--primary)">2</text>
+    <text x="54" y="84">3</text>
+    <text x="54" y="20" font-weight="bold">y</text>
+  </g>
+
+  <!-- Proiezioni tratteggiate del vettore a = (3, 2) -->
+  <g stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="4,4" stroke-opacity="0.6">
+    <line x1="220" y1="230" x2="220" y2="130" />
+    <line x1="70"  y1="130" x2="220" y2="130" />
+  </g>
+
+  <!-- Asta del vettore a = (3, 2) -->
+  <line 
+    x1="70" 
+    y1="230" 
+    x2="210" 
+    y2="136.6" 
+    stroke="var(--primary)" 
+    stroke-width="3" 
+    stroke-linecap="butt"
+  />
+
+  <!-- Freccia del vettore a = (3, 2) solida e perfettamente posizionata a (220, 130) -->
+  <polygon 
+    points="220,130 205,132.8 210.8,136.1 211.7,142.8" 
+    fill="var(--primary)" 
+  />
+
+  <!-- Punto di arrivo (3, 2) per precisione didattica -->
+  <circle cx="220" cy="130" r="3.5" fill="var(--primary)" />
+
+  <!-- Etichetta del vettore in perfetto stile LaTeX \vec{a} = (3, 2) senza caratteri unicode difettosi -->
+  <g>
+    <rect x="228" y="108" width="84" height="28" rx="6" fill="var(--background)" stroke="var(--primary)" stroke-width="1" stroke-opacity="0.3" />
+    <!-- Freccia vettoriale disegnata direttamente sopra la lettera 'a' (come \vec{a}) -->
+    <line x1="237" y1="115.5" x2="245" y2="115.5" stroke="var(--primary)" stroke-width="1.3" stroke-linecap="round" />
+    <polygon points="247.5,115.5 243.5,113.2 244.5,115.5 243.5,117.8" fill="var(--primary)" />
+    <!-- Lettera 'a' ed elementi testuali -->
+    <text x="237.5" y="127" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="var(--primary)">a</text>
+    <text x="248.5" y="127" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="var(--primary)"> = (3, 2)</text>
+  </g>
+</svg>

@@ -23,6 +23,7 @@ import {
   LessonNav,
   NavigazioneLezioni,
 } from '@/components/lesson-nav'
+import { SvgDiagram, DiagrammaSvg } from '@/components/svg-diagram'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -129,5 +130,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     LezionePrecedente,
     LessonNav,
     NavigazioneLezioni,
+
+    // DIAGRAMMI SVG ADATTIVI AI TEMI
+    // Uso file:   <SvgDiagram src="/images/geometria-1/vettore.svg" caption="Figura 1: Vettore" />
+    // Uso inline: <SvgDiagram caption="Grafico"><svg>...</svg></SvgDiagram>
+    SvgDiagram,
+    DiagrammaSvg,
   }
 }

@@ -60,7 +60,7 @@ export default async function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("color-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem("color-theme");if(t){document.documentElement.setAttribute("data-theme",t);}var s=localStorage.getItem("font-size");if(s){document.documentElement.style.fontSize=s+"%";}}catch(e){}})();`,
           }}
         />
       </head>
