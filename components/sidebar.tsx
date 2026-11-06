@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Importiamo icone comode per mostrare cartelle, file e bottoni di espansione
@@ -8,20 +8,95 @@ import { ChevronRight, ChevronDown, Folder, FolderOpen, FileText } from "lucide-
 // Importiamo il Tipo della nostra struttura dati
 import { TreeNode } from "@/lib/get-notes-tree";
 
+/**
+ * Normalizza un percorso URL per confronti sicuri:
+ * decodifica percent-encoding, rimuove barre finali e converte in minuscolo.
+ */
+function normalizePath(p?: string | null): string {
+  if (!p) return "";
+  let decoded = p;
+  try {
+    decoded = decodeURIComponent(p);
+  } catch {
+    // Se la decodifica fallisce, usa la stringa originale
+  }
+  return decoded.replace(/\/+$/, "").toLowerCase();
+}
+
+/**
+ * Verifica se un nodo corrisponde alla pagina corrente.
+ */
+function isNodeActive(node: TreeNode, pathname: string): boolean {
+  if (!node.url || !pathname) return false;
+  return normalizePath(node.url) === normalizePath(pathname);
+}
+
+/**
+ * Verifica ricorsivamente se tra i discendenti del nodo c'è la pagina corrente.
+ */
+function hasActiveDescendant(node: TreeNode, pathname: string): boolean {
+  if (!pathname || !node.children || node.children.length === 0) return false;
+  return node.children.some(
+    (child) => isNodeActive(child, pathname) || hasActiveDescendant(child, pathname)
+  );
+}
+
+/**
+ * Determina se questo nodo cartella deve essere espanso:
+ * è espanso se corrisponde alla pagina corrente (e ha figli) oppure se uno dei suoi
+ * discendenti a qualsiasi livello di profondità è la pagina corrente.
+ */
+function shouldNodeBeExpanded(node: TreeNode, pathname: string): boolean {
+  return isNodeActive(node, pathname) || hasActiveDescendant(node, pathname);
+}
+
 /* -------------------------------------------------------------------------
    SOTTO-COMPONENTE: SidebarNode
    Gestisce il rendering di un singolo elemento (cartella o file) nell'albero.
    È "ricorsivo": se ha dei figli, chiama sé stesso per stamparli!
    ------------------------------------------------------------------------- */
-function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
+function SidebarNode({
+  node,
+  level = 0,
+  openKey = 0,
+}: {
+  node: TreeNode;
+  level?: number;
+  openKey?: number;
+}) {
   const pathname = usePathname();
-  // Stato locale per ricordare se QUESTA specifica cartella è aperta o chiusa
-  const [isExpanded, setIsExpanded] = useState(false);
 
   // Un nodo ha dei figli se la proprietà children esiste ed ha elementi
-  const hasChildren = node.children && node.children.length > 0;
+  const hasChildren = Boolean(node.children && node.children.length > 0);
+
   // È la pagina in cui ci troviamo attualmente?
-  const isActive = node.url && pathname === node.url;
+  const isActive = isNodeActive(node, pathname);
+
+  // Calcola se questo nodo fa parte dell'albero della pagina corrente
+  const shouldAutoExpand = useMemo(
+    () => shouldNodeBeExpanded(node, pathname),
+    [node, pathname]
+  );
+
+  // Tracciamento dello stato manuale (se l'utente ha cliccato per aprire/chiudere)
+  const [manualOverride, setManualOverride] = useState<boolean | null>(null);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  const [prevOpenKey, setPrevOpenKey] = useState(openKey);
+
+  // Se cambia percorso di navigazione o se la barra laterale viene riaperta,
+  // resettiamo l'override manuale per mostrare l'albero fino alla pagina corrente
+  if (prevPathname !== pathname || prevOpenKey !== openKey) {
+    setPrevPathname(pathname);
+    setPrevOpenKey(openKey);
+    setManualOverride(null);
+  }
+
+  const isExpanded = manualOverride !== null ? manualOverride : shouldAutoExpand;
+
+  const toggleExpanded = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setManualOverride(!isExpanded);
+  };
 
   return (
     <div className="flex flex-col">
@@ -30,6 +105,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         Indentiamo dinamicamente in base a quanto siamo scesi nell'albero (level)
       */}
       <div 
+        data-active={isActive ? "true" : undefined}
         className={`flex items-center gap-1.5 py-1 px-1.5 rounded-md transition-colors ${
           isActive ? "bg-primary/10 text-primary font-medium" : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
         }`}
@@ -38,7 +114,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         {/* Pulsante freccina per espandere/collassare (solo se ci sono figli) */}
         {hasChildren ? (
           <button 
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={toggleExpanded}
             className="p-0.5 rounded hover:bg-primary/20 shrink-0"
             aria-label="Espandi cartella"
           >
@@ -51,7 +127,12 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
 
         {/* Icona della cartella (se ha figli) o del file (se è una foglia) */}
         {hasChildren ? (
-          isExpanded ? <FolderOpen size={14} className="text-primary shrink-0" /> : <Folder size={14} className="text-primary shrink-0" />
+          <span 
+            className="cursor-pointer shrink-0 inline-flex items-center"
+            onClick={toggleExpanded}
+          >
+            {isExpanded ? <FolderOpen size={14} className="text-primary shrink-0" /> : <Folder size={14} className="text-primary shrink-0" />}
+          </span>
         ) : (
           <FileText size={14} className="text-primary/60 shrink-0" />
         )}
@@ -64,7 +145,7 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
         ) : (
           <span 
             className="flex-1 truncate text-xs leading-tight cursor-pointer" 
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={toggleExpanded}
           >
             {node.name}
           </span>
@@ -79,7 +160,12 @@ function SidebarNode({ node, level = 0 }: { node: TreeNode; level?: number }) {
       {hasChildren && isExpanded && (
         <div className="flex flex-col">
           {node.children!.map((child, idx) => (
-            <SidebarNode key={idx} node={child} level={level + 1} />
+            <SidebarNode
+              key={idx}
+              node={child}
+              level={level + 1}
+              openKey={openKey}
+            />
           ))}
         </div>
       )}
@@ -95,6 +181,38 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
   // Stato globale della Sidebar intera (mostrata / nascosta)
   // Partiamo con "true" di default (Sidebar visibile)
   const [isOpen, setIsOpen] = useState(true);
+  const pathname = usePathname();
+  const [openKey, setOpenKey] = useState(0);
+  const navRef = useRef<HTMLElement>(null);
+
+  const handleToggle = () => {
+    setIsOpen((prev) => {
+      const next = !prev;
+      // Se stiamo aprendo la barra laterale, aggiorniamo openKey per espandere l'albero
+      if (next) {
+        setOpenKey((k) => k + 1);
+      }
+      return next;
+    });
+  };
+
+  // Se la sidebar è aperta, assicuriamoci che l'elemento attivo sia visibile nello scroll
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const timer = setTimeout(() => {
+      const activeEl = navRef.current?.querySelector('[data-active="true"]');
+      if (activeEl && navRef.current) {
+        const navRect = navRef.current.getBoundingClientRect();
+        const elRect = activeEl.getBoundingClientRect();
+        if (elRect.top < navRect.top || elRect.bottom > navRect.bottom) {
+          activeEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, pathname, openKey]);
 
   // Larghezza sidebar in px — usata sia per il pannello che per lo spacer
   const SIDEBAR_W = 220;
@@ -117,12 +235,12 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
         }}
       >
         {/* Albero di navigazione scrollabile */}
-        <nav className="flex-1 overflow-y-auto pt-3 pb-2 px-1.5">
+        <nav ref={navRef} className="flex-1 overflow-y-auto pt-3 pb-2 px-1.5">
           {tree.length === 0 ? (
             <p className="text-xs text-gray-500 italic px-2">Nessun appunto trovato.</p>
           ) : (
             tree.map((node, idx) => (
-              <SidebarNode key={idx} node={node} />
+              <SidebarNode key={idx} node={node} openKey={openKey} />
             ))
           )}
         </nav>
@@ -133,7 +251,7 @@ export function Sidebar({ tree }: { tree: TreeNode[] }) {
         verticalmente nell'area sotto la navbar (non nell'intera viewport).
       */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         style={{
           left: isOpen ? `${SIDEBAR_W}px` : "0px",
           top: "calc(var(--navbar-h) + (100vh - var(--navbar-h)) / 2)",
